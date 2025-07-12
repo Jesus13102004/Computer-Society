@@ -1,62 +1,67 @@
-# 🚀 Curso de Git y GitHub
+<!-- Banner -->
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg" alt="Git Logo" width="120"/>
+</p>
 
-> Bienvenido/a al curso de **Git y GitHub**, una guía práctica diseñada para quienes quieren dominar el control de versiones y la colaboración en proyectos de software como verdaderos profesionales.
-
-🎯 Este curso no son solo apuntes: aquí aprenderás paso a paso, con ejemplos reales, comandos útiles y buenas prácticas de uso profesional. Todo explicado con un enfoque directo, claro y aplicable.
-
----
-
-## 🧠 ¿Qué aprenderás?
-
-- Qué es **Git** y por qué es esencial para cualquier desarrollador o hacker ético.
-- Cómo crear repositorios, versionar tu código y regresar en el tiempo sin perder el control.
-- Cómo funciona **GitHub** como plataforma de colaboración, portafolio y flujo de trabajo.
-- Buenas prácticas para documentar tus proyectos y trabajar con ramas, pull requests, forks y más.
-- Cómo construir un perfil que destaque tus habilidades técnicas.
+<h1 align="center">Curso Profesional de Git y GitHub</h1>
+<p align="center"><strong>Repositorio de formación técnica en control de versiones y colaboración con Git y GitHub</strong></p>
 
 ---
 
-## 📁 Estructura del curso
+## Descripción general
 
-| Módulo | Contenido                                                                 |
-|--------|--------------------------------------------------------------------------|
-| 01     | Introducción a Git: control de versiones desde cero                     |
-| 02     | Comandos básicos de Git y flujo local de trabajo                        |
-| 03     | GitHub: creando y gestionando repositorios remotos                      |
-| 04     | Clonar, forkar, hacer pull request y contribuir a proyectos reales      |
-| 05     | Creación de README.md profesionales y archivos `.gitignore`             |
-| 06     | Buenas prácticas, seguridad y errores comunes al usar Git/GitHub        |
-
-📦 *Cada módulo contiene ejemplos, scripts, recursos visuales y ejercicios prácticos.*
+Este módulo forma parte del proyecto formativo del repositorio [Computer-Society](https://github.com/jearc/Computer-Society), orientado a la especialización en herramientas profesionales de desarrollo e ingeniería de software.  
+Aquí encontrarás una guía integral sobre **Git** y **GitHub**, diseñada para adquirir competencias sólidas en control de versiones, flujos de trabajo distribuidos, automatización y colaboración en entornos de desarrollo reales.
 
 ---
 
-## 🛠️ Requisitos
+## Temario
 
-- Ganas de aprender.
-- Tener instalado **Git** ([Descargar aquí](https://git-scm.com/downloads)).
-- Una cuenta en **GitHub** ([Crear cuenta](https://github.com/)).
+La carpeta contiene material dividido en unidades temáticas. Haz clic en cualquier tema para comenzar:
 
----
-
-## 🧑‍💻 ¿Para quién es este curso?
-
-- Estudiantes de ingeniería, desarrollo o ciberseguridad.
-- Personas que están iniciando en el mundo del software profesional.
-- Cualquiera que quiera dejar de perder su trabajo por no hacer respaldos o controlar versiones manualmente.
-
----
-
-## ✨ ¿Listo para convertirte en un pro del versionado?
-
-> *Comienza por el módulo 01 y prepárate para trabajar como se trabaja en los equipos reales del mundo del software y la ciberseguridad.*
+| Unidad | Tema                                                                  | Archivo |
+|--------|------------------------------------------------------------------------|---------|
+| 01     | [Fundamentos de Git](./fundamentos.md)                                 | `fundamentos.md` |
+| 02     | [Ramificaciones en Git (Branching)](./ramas.md)                        | `ramas.md`       |
+| 03     | [Git en el servidor](./servidor.md)                                    | `servidor.md`    |
+| 04     | [Git en entornos distribuidos](./distribuido.md)                       | `distribuido.md` |
+| 05     | [GitHub: Trabajo con repositorios remotos](./github.md)                | `github.md`      |
+| 06     | [Herramientas de Git y utilidades avanzadas](./herramientas.md)        | `herramientas.md`|
+| 07     | [Personalización de Git: configuración avanzada](./personalizacion.md) | `personalizacion.md` |
+| 08     | [Git y otros sistemas de control de versiones](./otros-sistemas.md)    | `otros-sistemas.md` |
+| 09     | [Los entresijos internos de Git](./internos.md)                        | `internos.md`    |
+| 10     | [Git en otros entornos (Windows, Linux, IDEs)](./entornos.md)          | `entornos.md`    |
+| 11     | [Comandos de Git: referencia práctica](./comandos.md)                  | `comandos.md`    |
 
 ---
 
-📬 Si tienes dudas, sugerencias o encuentras errores, ¡haz un issue o contáctame! Este curso está vivo y lo iré actualizando conforme yo mismo aprendo más.
+## Requisitos técnicos
+
+- Git instalado: [Descargar Git](https://git-scm.com/downloads)
+- Cuenta en GitHub: [Crear cuenta](https://github.com/join)
+- Editor recomendado: [Visual Studio Code](https://code.visualstudio.com)
 
 ---
 
-🔐 Licencia: [MIT](../LICENSE)
+## Recursos complementarios
 
-📌 Autor: **Jesús - Curso de Ciberseguridad e Ingeniería de Software**
+- [Documentación oficial de Git](https://git-scm.com/doc)
+- [Documentación de GitHub](https://docs.github.com/en)
+- [Libro gratuito: Pro Git](https://git-scm.com/book/en/v2)
+- [Hoja de referencia rápida (PDF)](https://education.github.com/git-cheat-sheet-education.pdf)
+
+---
+
+## Licencia
+
+Este contenido está licenciado bajo los términos de [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
+
+Esto significa que:
+
+- Puedes compartir, copiar y adaptar el contenido.
+- **No está permitida la comercialización** del material bajo ninguna forma.
+- Es obligatorio proporcionar **crédito adecuado** al autor original: Jesús Eduardo Arciniega Tlacomulco.
+
+---
+
+<p align="center"><i>Desarrollado por Jesús Eduardo Arciniega Tlacomulco – Curso de Git y GitHub</i></p>
