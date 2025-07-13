@@ -159,6 +159,7 @@ Git organiza su funcionamiento en tres **áreas principales**:
 2. Añades los cambios al área de preparación (staging).
 3. Confirmas los cambios (commit) y Git los almacena en el repositorio.
 ´´´
+
 ---
 
 ## <span style="color:#9E9D24"><strong>Licencia</strong></span>
