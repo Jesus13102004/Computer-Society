@@ -1,4 +1,9 @@
-# Control de Versiones
+<h1 align="center"><code>CONTROL DE VERSIONES</code></h1>
+
+
+<p align="center">
+  <img src="https://git-scm.com/images/logo@2x.png" width="200" alt="Git Logo"/>
+</p>
 
 ## Introducción
 
@@ -9,8 +14,13 @@ Al finalizar esta sección, comprenderás las ventajas de utilizar Git y estará
 
 ## ¿Qué es el control de versiones?
 
+<p align="center">
+  <img src="https://wac-cdn.atlassian.com/dam/jcr:47fc6b93-2b10-442d-9e36-e09106f49c5b/01%20Version%20control.svg?cdnVersion=1168" width="600" alt="Version Control Diagram"/>
+</p>
+
 El **control de versiones** es un sistema que permite gestionar los cambios realizados a uno o varios archivos a lo largo del tiempo.  
-Este tipo de herramienta es fundamental en proyectos de software, diseño, documentación y cualquier entorno donde sea necesario:
+Este tipo de herramienta es fundamental en proyectos de software, diseño, documentación y cualquier entorno donde sea necesario.
+El control de versiones puede:
 
 - Recuperar versiones anteriores de archivos.
 - Comparar cambios entre versiones.
@@ -22,6 +32,10 @@ Este tipo de herramienta es fundamental en proyectos de software, diseño, docum
 ## Tipos de sistemas de control de versiones
 
 ### 🔹 Control de versiones local
+
+<p align="center">
+  <img src="https://miro.medium.com/v2/resize:fit:1200/format:webp/1*X7nTqKzTQbxE4_PAEZ7x7Q.png" width="500" alt="Local Version Control"/>
+</p>
 
 En este modelo, los cambios se registran únicamente en el equipo local del usuario.
 
@@ -40,6 +54,10 @@ Esto permitía reconstruir cualquier versión de un archivo a partir de sus camb
 
 ### 🔹 Control de versiones centralizado (CVCS)
 
+<p align="center">
+  <img src="https://git-scm.com/images/about/centralized.png" width="400" alt="Centralized Version Control"/>
+</p>
+
 Este modelo introdujo un **servidor central** que almacena la versión principal del proyecto. Los colaboradores se conectan a él para obtener y enviar cambios.
 
 **Ventajas:**
@@ -55,6 +73,10 @@ Ejemplos de CVCS: Subversion (SVN), CVS.
 ---
 
 ### 🔹 Control de versiones distribuido (DVCS)
+
+<p align="center">
+  <img src="https://git-scm.com/images/about/distributed.png" width="400" alt="Distributed Version Control"/>
+</p>
 
 En un DVCS como Git, **cada colaborador tiene una copia completa del repositorio**, incluyendo su historial completo.
 
@@ -94,7 +116,9 @@ Cada archivo y commit es identificado de forma única mediante un **hash SHA-1**
 
 Ejemplo de hash SHA-1:
 
-    *24b9da6552252987aa493b52f8696cd6d3b00373*
+
+    24b9da6552252987aa493b52f8696cd6d3b00373
+
 
 
 Este mecanismo hace prácticamente imposible modificar archivos sin que Git lo detecte.
@@ -117,11 +141,15 @@ Git clasifica los archivos en tres **estados**:
 
 Git organiza su funcionamiento en tres **áreas principales**:
 
-| Área                | Función                                                                 |
-|---------------------|-------------------------------------------------------------------------|
-| Directorio de Git   | Contiene la base de datos interna con todos los objetos y versiones.    |
-| Directorio de trabajo | Es la versión actual del proyecto, visible y editable.                  |
-| Área de preparación (Staging Area) | Zona donde se agrupan los cambios que se incluirán en el próximo commit. |
+| Área                     | Función                                                                 |
+|--------------------------|-------------------------------------------------------------------------|
+| Directorio de Git        | Contiene la base de datos interna con todos los objetos y versiones.    |
+| Directorio de trabajo    | Es la versión actual del proyecto, visible y editable.                  |
+| Área de preparación      | Zona donde se agrupan los cambios que se incluirán en el próximo commit. |
+
+<p align="center">
+  <img src="https://wac-cdn.atlassian.com/dam/jcr:bc37d2c4-9910-4931-bf0c-b07165bd5403/03%20Staging%20area.svg?cdnVersion=1168" width="550" alt="Git staging area"/>
+</p>
 
 ---
 
