@@ -54,7 +54,7 @@ Esto permitía reconstruir cualquier versión de un archivo a partir de sus camb
 ###  Control de versiones centralizado (CVCS)
 
 <p align="center">
-  <img src="https://www.researchgate.net/publication/344668228/figure/fig1/AS:946847883464709@1602757535975/Figura-14-Sistema-de-control-de-versiones-centralizado.ppm" width="400" alt="Centralized Version Control"/>
+  <img src="https://aulasoftwarelibre.github.io/taller-de-git/images/git-central.png" width="400" alt="Centralized Version Control"/>
 </p>
 
 Este modelo introdujo un **servidor central** que almacena la versión principal del proyecto. Los colaboradores se conectan a él para obtener y enviar cambios.
@@ -74,7 +74,7 @@ Ejemplos de CVCS: Subversion (SVN), CVS.
 ###  Control de versiones distribuido (DVCS)
 
 <p align="center">
-  <img src="https://www.researchgate.net/publication/344668228/figure/fig2/AS:946847887679488@1602757536055/Figura-15-Sistema-de-control-de-versiones-distribuido.ppm" width="400" alt="Distributed Version Control"/>
+  <img src="https://pressroom.hostalia.com/contents/ui/theme/images/sites/4/control-versiones-distribuidos-blog-hostalia-hosting.jpg" width="400" alt="Distributed Version Control"/>
 </p>
 
 En un DVCS como Git, **cada colaborador tiene una copia completa del repositorio**, incluyendo su historial completo.
