@@ -19,19 +19,77 @@ El contenido se encuentra estructurado para uso autodidacta, académico o profes
 
 ## <span style="color:#C75100"><strong> Temario</strong></span>
 
-| Unidad | Tema                                                                                  | Archivo |
-|--------|----------------------------------------------------------------------------------------|---------|
-| 01     | [Control de versiones](./control.md)                                                  | `control.md` |
-| 02     | [Ramificaciones en Git (Branching)](./ramas.md)                                       | `ramas.md` |
-| 03     | [Git en el servidor](./servidor.md)                                                   | `servidor.md` |
-| 04     | [Git en entornos distribuidos](./distribuido.md)                                      | `distribuido.md` |
-| 05     | [GitHub: Trabajo con repositorios remotos](./github.md)                               | `github.md` |
-| 06     | [Herramientas de Git y utilidades avanzadas](./herramientas.md)                       | `herramientas.md` |
-| 07     | [Personalización de Git: configuración avanzada](./personalizacion.md)                | `personalizacion.md` |
-| 08     | [Git y otros sistemas de control de versiones](./otros-sistemas.md)                   | `otros-sistemas.md` |
-| 09     | [Los entresijos internos de Git](./internos.md)                                       | `internos.md` |
-| 10     | [Git en otros entornos (Windows, Linux, IDEs)](./entornos.md)                         | `entornos.md` |
-| 11     | [Comandos de Git: referencia práctica](./comandos.md)                                 | `comandos.md` |
+<table>
+  <thead>
+    <tr>
+      <th>Unidad</th>
+      <th>Tema</th>
+      <th>Archivo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>01</td>
+      <td><a href="./control.md">Control de versiones</a></td>
+      <td><code>control.md</code></td>
+    </tr>
+    <tr>
+      <td>02</td>
+      <td><a href="./fundamentos.md">Fundamentos de Git</a></td>
+      <td><code>fundamentos.md</code></td>
+    </tr>
+    <tr>
+      <td>03</td>
+      <td><a href="./ramas.md">Ramificaciones en Git (Branching)</a></td>
+      <td><code>ramas.md</code></td>
+    </tr>
+    <tr>
+      <td>04</td>
+      <td><a href="./servidor.md">Git en el servidor</a></td>
+      <td><code>servidor.md</code></td>
+    </tr>
+    <tr>
+      <td>05</td>
+      <td><a href="./distribuido.md">Git en entornos distribuidos</a></td>
+      <td><code>distribuido.md</code></td>
+    </tr>
+    <tr>
+      <td>06</td>
+      <td><a href="./github.md">GitHub: Trabajo con repositorios remotos</a></td>
+      <td><code>github.md</code></td>
+    </tr>
+    <tr>
+      <td>07</td>
+      <td><a href="./herramientas.md">Herramientas de Git y utilidades avanzadas</a></td>
+      <td><code>herramientas.md</code></td>
+    </tr>
+    <tr>
+      <td>08</td>
+      <td><a href="./personalizacion.md">Personalización de Git: configuración avanzada</a></td>
+      <td><code>personalizacion.md</code></td>
+    </tr>
+    <tr>
+      <td>09</td>
+      <td><a href="./otros-sistemas.md">Git y otros sistemas de control de versiones</a></td>
+      <td><code>otros-sistemas.md</code></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td><a href="./internos.md">Los entresijos internos de Git</a></td>
+      <td><code>internos.md</code></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td><a href="./entornos.md">Git en otros entornos (Windows, Linux, IDEs)</a></td>
+      <td><code>entornos.md</code></td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td><a href="./comandos.md">Comandos de Git: referencia práctica</a></td>
+      <td><code>comandos.md</code></td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
