@@ -27,10 +27,8 @@ Al finalizar esta sección, serás capaz de:
 
 <p>Existen dos formas principales de comenzar a trabajar con Git en un proyecto:</p>
 
----
 
 ###  1. Iniciar un repositorio en un proyecto existente
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
 
 Si ya cuentas con un proyecto local y deseas comenzar a gestionarlo con Git, solo necesitas inicializar el repositorio dentro del directorio raíz del proyecto:
 
@@ -52,7 +50,6 @@ Estos comandos serán explicados con más detalle en las siguientes secciones.
 
 
 ### 2. Clonando un repositorio existente en Git
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
 
 <p>Para obtener una copia local de un repositorio remoto ya existente (por ejemplo, en GitHub), se utiliza el siguiente comando:</p>
 
@@ -88,7 +85,7 @@ Este comando realiza las siguientes acciones:
 
 
 ### Revisando los estados de los archivos
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 <p>Para ver el estado actual de los archivos en tu proyecto, se utiliza el siguiente comando:</p>
 
@@ -153,7 +150,7 @@ Ambos comandos producen una salida abreviada que resume el estado de cada archiv
 Este modo es ideal para revisiones rápidas y limpieza visual en proyectos con múltiples archivos en seguimiento
 
 ### Rastrear archivos nuevos
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 
 Para comenzar a rastrear un archivo nuevo y agregarlo al área de preparación (staging), se utiliza el siguiente comando:
@@ -180,7 +177,6 @@ Esto indica que el archivo <code>nom_arch</code> ya se encuentra preparado para 
 
 
 ### Ignorar archivos
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
 
 <p>En la mayoría de los proyectos existen archivos que no es necesario preparar ni confirmar, como:</p>
 
@@ -193,8 +189,6 @@ Esto indica que el archivo <code>nom_arch</code> ya se encuentra preparado para 
 Para excluir estos archivos del control de versiones, se utiliza el archivo oculto <code>.gitignore</code>.
 
 ####  Reglas comunes en <code>.gitignore</code>
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
-
 
 <ul>
     <li>Se ignoran las <strong>líneas en blanco</strong> y las que comienzan con <code>#</code> (comentarios).</li>
@@ -206,7 +200,7 @@ Para excluir estos archivos del control de versiones, se utiliza el archivo ocul
 </ul>
 
 #### Patrones glob en Git
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 
 Los patrones glob son una forma simplificada de expresiones regulares utilizadas comúnmente en terminales.
@@ -252,7 +246,7 @@ Colocar correctamente el archivo <code>.gitignore</code> desde el inicio de un p
 
 
 ### Ver los cambios preparados y no preparados
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 
 Para revisar en detalle qué líneas han sido modificadas, añadidas o eliminadas en los archivos del proyecto, se utiliza el comando:
@@ -275,7 +269,7 @@ Ambos comandos comparan los archivos preparados con la última instantánea conf
 
 
 ### Confirmar los cambios
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 
 Una vez que los cambios han sido preparados con <code>git add</code>, puedes confirmarlos (guardarlos en el historial del repositorio) utilizando el siguiente comando:
@@ -309,7 +303,6 @@ Este comando omite el uso de <code>git add</code> para archivos ya rastreados, p
 
 
 ### Eliminar archivos</h4>
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
 
 
 Para eliminar un archivo del proyecto y reflejar esa eliminación en el historial de Git, es necesario:
@@ -342,7 +335,6 @@ _El comando <code>git rm</code> también acepta patrones glob, permitiendo elimi
 
 
 ### Cambiarle el nombre a un archivo
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
 
 
 Para cambiarle el nombre a un archivo se usa el comando:
@@ -378,7 +370,7 @@ Este comando muestra la lista de todas las confirmaciones que se han hecho en el
 </ul>
 
 ### Parámetros útiles para <code>git log</code></h3>
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 
 <p>Al comando <code>git log</code> se le pueden agregar ciertos parámetros para limitar o hacer más precisa la búsqueda. Algunos de los más comunes son:</p>
@@ -398,7 +390,7 @@ $ git log --pretty=fuller
 ```
 
 ### Comandos para limitar la salida de <code>git log</code>
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 
 <Puedes filtrar la salida del historial usando los siguientes parámetros:
@@ -427,7 +419,7 @@ $ git log --pretty=fuller
 <h2>Deshacer cosas</h2>
 
 ### Deshacer una confirmación
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 
 Uno de los casos más comunes es deshacer una confirmación, ya sea porque te equivocaste en el mensaje o porque olvidaste agregar un archivo. Para modificar la última confirmación se usa:
@@ -450,7 +442,7 @@ La segunda confirmación reemplaza el resultado de la primera y Git lo tratará 
 
 
 ### Deshacer un archivo preparado
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 
 Si agregaste un archivo al área de preparación (staging area) con <code>git add</code>, pero decidiste que no quieres confirmarlo aún, puedes sacarlo del área de preparación usando:
@@ -463,7 +455,7 @@ Esto no elimina el archivo ni sus cambios, simplemente lo remueve del área de s
 
 
 ### Deshacer un archivo modificado
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 
 
@@ -491,7 +483,6 @@ Puedes tener múltiples repositorios remotos configurados en tu proyecto. Alguno
 
 
 ### Ver tus remotos
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
 
 
 Para ver los repositorios remotos configurados en tu proyecto se usa:
@@ -508,7 +499,6 @@ $ git remote -v
 ```
 
 ### Añadir repositorios remotos
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
 
 Para vincular tu proyecto local con un repositorio remoto (por ejemplo, en GitHub o GitLab), se utiliza el siguiente comando:
 
@@ -524,7 +514,7 @@ $ git remote add upstream https://github.com/otro_usuario/proyecto.git
 Ahora puedes referirte a ese remoto mediante el nombre que asignaste (por ejemplo, <code>upstream</code>).
 
 ### Traer y combinar datos desde un remoto
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 Para obtener actualizaciones desde un repositorio remoto sin integrarlas directamente en tu rama actual se usa el siguiente comando:
 
@@ -548,7 +538,7 @@ Este comando es útil cuando tu rama local está conectada (trackeando) una rama
 
 
 ### Enviar cambios a un remoto
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 Para enviar tus confirmaciones locales a un repositorio remoto se usa el comando:
 
 ```bash
@@ -565,7 +555,7 @@ $ git push
 ```
 
 ### Inspeccionar detalles de un remoto
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 Para ver información detallada de un remoto específico se utiliza el comando:
 
 ```bash
@@ -575,12 +565,14 @@ Este comando muestra la URL del repositorio, ramas rastreadas y detalles de conf
 
 
 ### Renombrar o eliminar un remoto
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 Para cambiar el nombre de un remoto existente se usa el comando:
+
 ```bash
 $ git remote rename nombre_actual nuevo_nombre
 ```
 Para eliminar un remoto del proyecto se usa el comando:
+
 ```bash
 $ git remote rm nombre_remoto
 ```
@@ -600,7 +592,7 @@ El <strong>etiquetado</strong> en Git sirve para marcar puntos importantes dentr
 
 
 ### Listar etiquetas
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 Para listar todas las etiquetas definidas en el repositorio, utiliza el siguiente comando:
 
@@ -614,7 +606,7 @@ $ git tag -l "v1.8.5*"
 ```
 
 ### Crear una etiqueta
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 ###Etiqueta ligera
 Este tipo de etiqueta funciona como una rama inmutable, simplemente apunta a un commit:
@@ -646,8 +638,9 @@ $ git show nombre_tag
 
 
 ### Etiquetado tardío
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 Si necesitas etiquetar un commit anterior, puedes especificarlo con su checksum (parcial o completo):
+
 ```bash
 $ git tag -a nombre_tag <checksum>
 ```
@@ -659,7 +652,7 @@ $ git log
 ```
 
 ### Compartir etiquetas
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 Las etiquetas no se comparten automáticamente con los repositorios remotos, por lo que debes enviarlas explícitamente.
 Para enviar las etiquetas existen dos comandos:
@@ -670,6 +663,7 @@ $ git push origin nombre_tag
 ```
 
 ### Enviar todas las etiquetas
+
 ```bash
 $ git push origin --tags
 ```
@@ -683,7 +677,7 @@ Por ejemplo, puedes abreviar <code>git commit</code> como <code>git ci</code> me
 
 
 ### Crear un alias
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 Para configurar un alias global:
 
@@ -716,7 +710,7 @@ $ git config --global --edit
 ---
 
 <h2>Conclusión</h2>
-<hr style="height:1px; border:none; background-color:rgba(128, 128, 128, 0.4);"/>
+
 
 Con lo aprendido en este capítulo, ya tienes el conocimiento necesario para realizar las operaciones básicas con Git, entre ellas:
 
