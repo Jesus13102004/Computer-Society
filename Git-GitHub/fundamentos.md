@@ -2,7 +2,9 @@
   <img src="https://git-scm.com/images/logo@2x.png" width="200" alt="Git Logo"/>
 </p>
 
-<h2>📘 Fundamentos de Git — Introducción a los comandos básicos</h2>
+<h1 align="center"><code>FUNDAMENTOS DE GIT</code></h1>
+
+## Introducción a los comandos básicos
 
 En este capítulo se presentan los comandos fundamentales para comenzar a trabajar con Git en proyectos locales y remotos.
 
