@@ -8,7 +8,7 @@
 <h2>Introducción a las Ramificaciones en Git</h2>
 
 <p>
-Trabajar con <strong>ramificaciones</strong> significa que, a partir de una rama principal (<code>main</code>), se pueden crear diferentes flujos de trabajo. 
+Trabajar con <strong>ramificaciones</strong> significa que a partir de una rama principal (<code>main</code>), se pueden crear diferentes flujos de trabajo. 
 Cualquier sistema de control de versiones moderno incluye algún mecanismo para el uso de ramas. 
 Sin embargo, en muchos de estos sistemas, trabajar con ramificaciones puede resultar costoso, ya que suele requerir una copia completa del código, lo cual puede consumir mucho tiempo y recursos, especialmente en proyectos grandes.
 </p>
@@ -174,13 +174,13 @@ $ git checkout -b hotfix
 ```bash
 $ git checkout main
 $ git merge hotfix
-```
+
 
 Updating f42c576..3a0874c
 Fast-forward
  Index.html | 2 ++
  1 file changed, 2 insertions(+)
-
+```
 
 <p>Cuando Git puede avanzar el puntero de la rama directamente porque no hay divergencias, realiza un <strong>fast-forward</strong>. Esto simplifica el historial de confirmaciones.</p>
 
@@ -201,10 +201,10 @@ $ git merge main
 
 <p>Supongamos que ya terminaste de trabajar en la rama <code>iss53</code> que resolvía el error <strong>#53</strong>. Al igual que hicimos con la rama <code>hotfix</code>, ahora vas a fusionar el contenido de <code>iss53</code> con la rama principal <code>main</code>. Para hacerlo, ejecuta los siguientes comandos:</p>
 
-<pre><code>$ git checkout main
+```bash
+$ git checkout main
 Switched to branch 'main'
 
-```bash
 $ git merge iss53
 Merge made by the 'recursive' strategy.
  index.html | 1 +
@@ -364,9 +364,9 @@ Esta técnica permite realizar cambios aislados de forma rápida y organizada. A
 
 <img src="https://mascandobits.es/blog/wp-content/uploads/2021/03/git_develop_flow.png" alt="Flujo de ramas puntuales en Git" width="600"/>
 
+---
 
-
-<h3>Ramas Remotas</h3>
+<h2>Ramas Remotas</h2>
 
 <p>
 Las ramas remotas son referencias a ramas que existen en un repositorio remoto, como puede ser GitHub, GitLab o Bitbucket. Aunque técnicamente se almacenan en tu repositorio local, no puedes desplazarte directamente a ellas ni modificarlas como lo harías con una rama local. Se actualizan automáticamente cada vez que realizas una operación de red como <code>git fetch</code> o <code>git pull</code>.
@@ -380,109 +380,216 @@ Estas ramas sirven como marcadores de referencia que indican el último estado c
 <strong>Consejo:</strong> Las ramas remotas no se actualizan automáticamente con los cambios hechos en el servidor. Es buena práctica ejecutar <code>git fetch</code> con regularidad para mantener tus referencias remotas sincronizadas.
 </div>
 
-<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDdpSASI_4s8-6wo5Y-H-b0fuE74Pgx-meKA9UscEryTct3diK_UHiQGEpdQHIpww8mWc8wtpFIIsutKqgsZlWchL11vH6axQLAfHSso2MFE8XWYVtXM8VNI6F35PElXaCPwAtpM2VGOwc/s1600/trabajo-git.jpg" alt="Ramas remotas en Git" width="600"/>
+
+
+
+<h3>Publicar</h3>
+
+<p>
+Si deseas compartir tu trabajo con otros, necesitas publicar tu rama local enviándola a un repositorio remoto en el que tengas permisos de escritura. Git no sincroniza automáticamente tus ramas locales con los remotos; tú decides explícitamente qué ramas enviar.
+</p>
+
+<p>
+Esto permite mantener ramas privadas en tu entorno local y publicar únicamente aquellas que realmente deseas compartir. Para enviar una rama al servidor remoto, utiliza el siguiente comando:
+</p>
+
+```bash
+$ git push nombre_remoto nombre_rama
+```
+
+<p>
+Cuando clonas o haces <code>git fetch</code>, Git trae las ramas remotas, pero no las convierte en ramas locales editables. En su lugar, crea un apuntador de solo lectura como <code>origin/rama</code>.
+</p>
+
+<p>
+Si deseas incorporar esa rama remota a tu trabajo actual sin editarla directamente, puedes hacer un merge:
+</p>
+
+```bash
+$ git merge origin/rama
+```
+
+<p>
+Y si quieres trabajar con una copia editable basada en la rama remota, puedes crear una nueva rama local desde ella con:
+</p>
+
+```bash
+$ git checkout -b mi-rama origin/rama
+```
+
+<div class="note">
+<strong>Nota:</strong> Las ramas remotas funcionan como referencia, pero todo el trabajo y las confirmaciones deben realizarse en una rama local. Solo entonces podrás publicar tus avances con <code>git push</code>.
+</div>
+
+
+
+
+<h3>Hacer Seguimiento a las Ramas</h3>
+
+<p>
+Al activar una rama local a partir de una rama remota, Git crea automáticamente una <strong>rama de seguimiento</strong>. Estas ramas locales tienen una relación directa con su contraparte remota, lo que permite que, al usar el comando <code>git pull</code>, Git sepa desde qué servidor recuperar y fusionar los datos.
+</p>
+
+<p>
+Cuando clonas un repositorio, se crea por defecto la rama <code>main</code>, que realiza seguimiento a <code>origin/main</code>. Sin embargo, puedes crear otras ramas de seguimiento. Esta operación es tan común que Git proporciona un parámetro específico para ello: <code>--track</code>.
+</p>
+
+```bash
+$ git checkout --track remote/rama
+```
+
+<div class="note">
+<strong>Nota:</strong> El parámetro <code>--track</code> crea una nueva rama local que sigue automáticamente a la rama remota especificada.
+</div>
+
+<p>
+Si ya tienes una rama local y deseas asignarle una rama remota existente como destino de seguimiento, o deseas cambiarla, puedes usar el siguiente comando:
+</p>
+
+```bash
+$ git branch -u origin/serverfix
+Branch serverfix set up to track remote branch serverfix from origin
+```
+
+<p>
+Para ver todas las ramas de seguimiento que tienes configuradas, puedes utilizar:
+</p>
+
+```bash
+$ git branch -vv
+```
+
+<p>
+Este comando listará tus ramas locales junto con información adicional, incluyendo la rama remota que siguen y si están adelantadas, atrasadas o ambas con respecto a ella.
+</p>
+
+
+
+<h3>Traer y Fusionar</h3>
+
+<p>
+Para obtener y fusionar los cambios más recientes desde el servidor, existen dos formas de hacerlo:
+</p>
+
+<ol>
+  <li>
+    Usar el comando <code>git fetch</code> para traer los datos desde el servidor.
+  </li>
+  <li>
+    Luego, emplear <code>git merge</code> para fusionar esos datos en tu rama actual.
+  </li>
+</ol>
+
+<p>
+Sin embargo, existe un comando que combina ambos pasos en uno solo:
+</p>
+
+```bash
+$ git pull
+```
+
+<div class="note">
+<strong>Consejo:</strong> Aunque <code>git pull</code> simplifica el proceso, se recomienda realizar ambos pasos por separado (<code>fetch</code> y <code>merge</code>). Esto te da mayor control sobre los cambios y evita confusiones, ya que el comportamiento de <code>git pull</code> puede no ser del todo claro si hay conflictos o diferencias inesperadas.
+</div>
+
+
+<h3>Eliminar ramas remotas</h3>
+
+<p>
+Al igual que con las ramas locales, una vez que se ha fusionado una rama remota con la rama principal y ya no se utilizará, lo ideal es eliminarla para mantener limpio el repositorio. 
+</p>
+
+<p>
+Para eliminar una rama remota se utiliza el parámetro <code>--delete</code> del comando <code>git push</code>. Por ejemplo, si deseas eliminar una rama llamada <code>serverfix</code>, debes ejecutar:
+</p>
+
+```bash
+$ git push origin --delete serverfix
+```
+
+<div class="warning">
+<strong>Nota:</strong> Este comando elimina el apuntador a la rama en el servidor remoto. Los servidores Git suelen conservar los datos durante un tiempo, por lo que si la rama fue eliminada por error, puede ser relativamente sencillo recuperarla si se actúa pronto.
+</div>
 
 ---
 
+<h2>Reorganizar el Trabajo Realizado</h2>
+
+<p>
+En Git existen dos formas principales de integrar los cambios de una rama en otra: la <strong>fusión</strong (<em>merge</em>) y la <strong>reorganización</strong (<em>rebase</em>). 
+</p>
+
+<p>
+En esta sección exploraremos en qué consiste el comando <code>rebase</code>, cómo funciona y en qué casos <strong>no es recomendable</strong> utilizarlo.
+</p>
 
 
+<h3>Reorganización Básica</h3>
 
+<p>
+La reorganización (<em>rebase</em>) consiste en tomar las confirmaciones de una rama y aplicarlas sobre otra, como si hubieran sido creadas en secuencia. 
+Este proceso es útil para mantener un historial lineal y limpio, especialmente cuando trabajas con ramas paralelas.
+</p>
 
+<p>
+Un ejemplo típico de uso es el siguiente:
+</p>
 
-
-
-
-
-
-Publicar
-
-Si quieres compartir tu rama tienes que hacerle un push hacia un remoto donde tengas permisos de escritura. Las ramas locales no se sincronizan automaticamente con los remotos en los que escribes, sino que se tienen que mandar expresamente las ramas que deseas compartir.
-De esta manera puedes tener ramas privadas que no deseas compartir, llevando a un remoto solo las que quieres compartir
-El comando para enviar una rama al servidor es :
-
-$ git push nom_remote branch 
-
-Cuando recuperas una rama remota no obtienes una copia local editable, solo tienes un puntero no editable a “remote/rama”
-
-Si quieres integrar tu rama remota a tu trabajo actual usa el comando
-
-$ git merge remote/rama
-
-Y si quieres tener tu propia rama para trabajar puedes crearla basandote en la rama remota.
-
-$ git checkout -b rama remote/rama
-
-Esto te da una rama local en la que puedes trabajar que inicia en donde remote/rama estaba en ese momento
-
-
-Hacer Seguimiento a las Ramas
-
-Al activar una rama local a traves de una rama remota se crea automaticamente una “rama de seguimiento”
-Las ramas de seguimiento son ramas locales que tienen relacion cirecta con una rama remota y al usar el comando “pull” Gita sabe de que servidor recuperar y fusionar datos.
-Cuando clonas un repositorio se crea la rama main que hace segimiento de origin/main, sin embargo puedes crear mas ramas de seguimiento, esta operación es tan comun que git ofrece el parametro –track
-
-$ git checkout --track remote/rama
-Explicar que hace el parametro --track
-
-Si ya tienes una rama local y quieres asignarla a una rama remota que acabas de traer o quieres cambiar la rama a la que le hace seguimiento puedes usar el comando:
-
-$ git branch -u origin/serverfix
-Branch serverfix set up to track remote branch serverfix from origin
- 
-Si quieres ver las ramas de seguimiento que tienes asignadas puedes usar el comando:
-
-$ git branch -vv
-
-Esto listara tus ramas locales con mas informacion incluyendo a que sigue cad rama y si tu rama esta por delante, por detrás o ambas
-
-
-Traer y Fusionar
-
-Para traer y fusionar los cambios que no has recuperado del servidor existen dos maneras, la primera e como ya lo habiamos visto, utilizando los ccomandos “git fetch” para traer los daros del servidor y “git merge” para fusionar los datos, pero existe un comando que hace las dos cosas al mismo tiempo y ese es el comando:
-
-$ git pull
-
-Aunque este comando simplifica el proceso es mas recomendado hacer el proceso completo, ya que el resultado de “git pull” puede ser confuso.
-
-
-Eliminar ramas remotas
-
-Al igual que las ramas locales despues de fusionarlas con tu rama principal es necesario eliminarla ya que no se volvera a usar, para eliminar la rama remota se usa el parametro “--delete” del comando “git push”, por ejemplo si quieres eliminar una rama que se llame serverfix se usa el siguiente comando:
-
-$ git push --delete serverfix
-
-Lo que hace este comando es eliminar el apuntador al servidor, el servidor Git suele almacenar los datos por un tiempo asi que si la eliminaste por error suele ser facil recuperarla
-
-
-
-Reorganizar el Trabajo Realizado
-En Git existen dos formas de integrar los cambios, una de ellas es fusionando (merged) y la otra es reorganizando (rebase): Veremos en que consiste la reorganizacion y en que casos no es conveniente usarla.
-
-
-Reorganizacion Basica
-Se trata de capturar los cambios introducidos en una confirmacion de una rama y replicarlos en la confirmacion de otra, un ejemoplo de uso es el siguiente:
-
+```bash
 $ git checkout experiment
 $ git rebase master
+```
 
-Esto hace que git vaya al ancestro comun de ambas ramas, saque las diferencias introducidas por cada confirmacion en la rama en la que estas, guarde esas diferencias en archivos temporales, reinicie la rama actual hasta llevarla a la misma confirmacion que la rama de donde quieres reorganizar y finalmente vuelva aplicar ordenadamente los cambios.
-Ahora ya puedes regresar a la rama main y ejecutar el comando “git merge”
+<p> Este comando realiza los siguientes pasos: </p> 
+<ul> 
+   <li>Git identifica el ancestro común entre <code>experiment</code> y <code>master</code>.</li> 
+   <li>Extrae las diferencias generadas por cada confirmación en <code>experiment</code> desde ese punto común.</li> 
+   <li>Guarda temporalmente esos cambios.</li> 
+   <li>Reinicia la rama <code>experiment</code> para que comience desde la última confirmación de <code>master</code>.</li> 
+   <li>Aplica, una por una, las confirmaciones guardadas sobre la nueva base.</li> 
+</ul> 
+<p> Una vez finalizado el rebase, puedes volver a la rama <code>main</code> y fusionar los cambios: </p>
 
+```bash
 $ git checkout main
-$ fit merge experiment
+$ git merge experiment
+```
 
-Si examinas el historial de una rama reorganizada, veras que aparece en forma lineal como si todo se hubiera realizado en serie, pero realmente se realizo en paralelo
+<p> Si revisas el historial después del <code>rebase</code>, notarás que las confirmaciones aparecen en línea recta, como si todo el trabajo se hubiera realizado en serie, aunque en realidad se desarrolló en paralelo. </p>
 
+<h3>Los Peligros de Reorganizar</h3>
 
-Los Peligros de Reorganizar
+<div class="nota">
+  <strong>Nota:</strong> <em>Nunca reorganices confirmaciones que ya hayas enviado a un repositorio público.</em>
+</div>
 
-Nota:Nunca reorganices confirmaciones que hayas enviado a un repositorio publico.
+<p>
+El uso de <code>git rebase</code> puede traer complicaciones serias si se aplica sobre confirmaciones que ya han sido compartidas con otros colaboradores. Al reorganizar, Git elimina las confirmaciones existentes y genera nuevas confirmaciones que pueden parecer iguales, pero son técnicamente distintas (con diferentes identificadores).
+</p>
 
-Cuando reorganizas algo se borran las confirmaciones ya creadas y se crean unas nuevas que son similares pero diferentes. Si envias una confirmacion al servidor y alguien la recoje de ahí y despues tu las reescribes con “git rebase” y las vuelves a enviar, los colaboradores tendran que refusionar su trabajo y todo se volvera complicado cuando intentes recoger su trabajo de vuelta sobre el tuyo
+<p>
+Si ya compartiste tu historial y luego lo reorganizas con <code>git rebase</code> para subirlo de nuevo, tus compañeros tendrán que refusionar su trabajo porque el historial que ellos tienen no coincidirá con el nuevo. Esto puede causar conflictos innecesarios y dificultar la colaboración.
+</p>
 
+<p>
+Por ello, <strong>usa <code>rebase</code> solo en ramas locales y privadas</strong>, donde tú tienes el control completo del historial.
+</p>
 
-Conclusiones
-Aprendimos los procedimientos basicos de ramificacion y fusion, ya podras crear nuevas ramas, saltando entre ramas para trabajar y fusionando ramas entre ellas. Tambien sabras como compartir tus ramas enviandolas a un servidor, como trabajar colaborativamente en ramas compartidas y como reorganizar tus ramas antes de compartirlas
- 
+---
+
+<h2>Conclusiones</h2>
+
+<p>
+En esta sección aprendiste los procedimientos básicos de ramificación y fusión en Git. Ahora sabes cómo crear nuevas ramas, cambiar entre ellas para desarrollar distintas funcionalidades o corregir errores, y cómo fusionar ramas de forma segura.
+</p>
+
+<p>
+También estás capacitado para compartir tus ramas a través de un servidor remoto, colaborar con otras personas en ramas compartidas y reorganizar tu historial de trabajo antes de hacerlo público.
+</p>
+
+<p>
+Dominar estas herramientas te permitirá llevar un control más claro, flexible y profesional sobre tus proyectos, facilitando el trabajo en equipo y manteniendo un historial limpio y comprensible.
+</p>
+
 
 
