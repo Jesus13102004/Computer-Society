@@ -1,208 +1,397 @@
-Ramificaciones en Git
-Trabajar con ramificaciones significa que a partir de una rama principal (main) se van creando diferentes flujos de trabajo, cualquier sistema de versiones moderno tiene algún mecanismo que soporta el uso de ramas, pero este suele ser muy costoso por que a menudo requiere una nueva copia del código y en proyectos grandes puede tomar mucho tiempo.
-Git destaca por su rapidez al manejar ramificaciones al hacer este proceso casi instantáneo, hace todas las operaciones de ramificación al igual que el avance o retroceso entre distintas ramas tremendamente rápido.
-Entender y manejar las ramificaciones te proporciona una poderosa y exclusiva herramienta que puede cambiar la forma en la que desarrollas.
+<p align="center">
+  <img src="https://git-scm.com/images/logo@2x.png" width="200" alt="Git Logo"/>
+</p>
 
-¿Qué es una rama?
+<h1 align="center"><code>Ramificaciones en Git</code></h1>
 
-Empezaremos recordando como git almacena sus datos, no los almacena guardando solo diferencias, sino que los almacena como copias puntuales de los archivos completos.
-En cada confirmación de datos Git almacena una instantánea de los archivos preparados, realiza una suma de control de cada uno de ellos, almacena una copia de cada uno en el repositorio (“blobs”) y guarda cada suma de control en el área de preparación.
-Si haces más cambios y vuelves a confirmar, la siguiente confirmación guardara un apuntador a su confirmación precedente.
 
-Una rama en Git es simplemente un apuntador móvil apuntando a una de esas confirmaciones, la rama principal por defecto de Git es “main”
+<h2>Introducción a las Ramificaciones en Git</h2>
 
-Crear una rama nueva
+<p>
+Trabajar con <strong>ramificaciones</strong> significa que, a partir de una rama principal (<code>main</code>), se pueden crear diferentes flujos de trabajo. 
+Cualquier sistema de control de versiones moderno incluye algún mecanismo para el uso de ramas. 
+Sin embargo, en muchos de estos sistemas, trabajar con ramificaciones puede resultar costoso, ya que suele requerir una copia completa del código, lo cual puede consumir mucho tiempo y recursos, especialmente en proyectos grandes.
+</p>
 
-Cuando creas una rama nueva simplemente se crea un apuntador para que se pueda mover libremente.
-Supongamos que quieres crear una nueva rama llamada “testing”, para esto usamos el comando:
+<p>
+Git destaca por su <strong>rapidez</strong> en el manejo de ramificaciones. 
+Este proceso es casi instantáneo, y tanto la creación de ramas como el cambio entre ellas (avanzar o retroceder) se realiza de forma extremadamente eficiente.
+</p>
 
+<p>
+Comprender y utilizar adecuadamente las ramificaciones en Git te brinda una herramienta poderosa y versátil, capaz de transformar significativamente tu flujo de desarrollo.
+</p>
+
+---
+
+<h2>¿Qué es una rama?</h2>
+
+<p>
+Antes de profundizar en el concepto de ramas, recordemos cómo Git almacena sus datos. A diferencia de otros sistemas de control de versiones, Git no guarda únicamente las diferencias entre archivos. En su lugar, Git guarda <strong>instantáneas completas</strong> de los archivos preparados en cada confirmación (<em>commit</em>).
+</p>
+
+<p>
+Cada vez que se realiza una confirmación, Git calcula una suma de control (<em>checksum</em>) para cada archivo, guarda una copia de estos archivos en el repositorio (conocidos como <strong>blobs</strong>) y almacena las sumas de control en el área de preparación. 
+Cuando haces cambios adicionales y vuelves a confirmar, esa nueva confirmación incluirá un <strong>apuntador</strong> que referencia a la confirmación anterior.
+</p>
+
+<p>
+Una <strong>rama</strong> en Git es, en esencia, un <strong>apuntador móvil</strong> que señala a una de estas confirmaciones. Por convención, la rama principal por defecto en Git se llama <code>main</code>.
+</p>
+
+
+<h3>Crear una rama nueva</h3>
+
+<p>
+Cuando creas una rama nueva en Git, simplemente estás generando un nuevo <strong>apuntador</strong> que puede moverse libremente conforme avances en el desarrollo.
+</p>
+
+<p>
+Supongamos que deseas crear una nueva rama llamada <code>testing</code>. Para ello, puedes utilizar el siguiente comando:
+</p>
+
+```bash
 $ git branch testing
+```
 
-Esto crea un apuntador apuntando a la confirmación donde estés actualmente.
-Git identifica en que rama estas en cada momento por el apuntador especial HEAD, el comando “Branch” solo crea la rama, pero no salta a dicha rama.
-Para saber a dónde apunta cada rama se puede hacer lo siguiente:
+<p>
+Este comando crea un nuevo apuntador que señala a la confirmación actual. Git determina en qué rama estás trabajando mediante un apuntador especial llamado <code>HEAD</code>. 
+Es importante destacar que <code>git branch</code> solamente crea la rama, pero no cambia tu contexto actual a ella.
+</p>
 
-$ git log  --pretty=oneline --decorate
+<p>
+Para ver hacia qué confirmación apunta cada rama, puedes ejecutar:
+</p>
+
+```bash
+$ git log --pretty=oneline --decorate
+```
+
+<p>Por ejemplo, podrías ver una salida como la siguiente:</p>
+
+```bash
 f30ab (HEAD, main, testing) add feature
 34ac2 fixed bug
 98ca9 initial commit
+```
 
-Esto quiere decir que la rama “main” y la rama “testing” están junto a la confirmación f30ab.
+<p>
+Esto indica que tanto la rama <code>main</code> como <code>testing</code> apuntan a la confirmación <code>f30ab</code>, y que actualmente estás trabajando sobre esa misma confirmación (por la presencia de <code>HEAD</code>).
+</p>
 
-Cambiar de Rama
 
-Para saltar de rama se usa el comando:
 
+<h3>Cambiar de rama</h3>
+
+<p>Cambiar de rama en Git implica mover el apuntador especial <code>HEAD</code> a la rama deseada. Para hacerlo, se utiliza el siguiente comando:</p>
+
+```bash
 $ git checkout testing
+```
 
-Esto mueve el apuntador HEAD a la rama testing, si hacemos una confirmación estando en la rama “testing” veremos que la rama avanza, pero la rama main no se mueve.
+<p>Esto mueve el apuntador <code>HEAD</code> a la rama <strong>testing</strong>. Si realizas una confirmación mientras estás en esta rama, verás que dicha rama avanza, pero la rama <code>main</code> permanece intacta.</p>
 
-Si regresamos a la rama principal con este comando:
+<p>Si deseas volver a la rama principal, usa el siguiente comando:</p>
 
+```bash
 $ git checkout main
+```
 
-Van a pasar dos cosas, primero el apuntador HEAD se mueve a la rama main y segundo, revierte los archivos del directorio de trabajo dejándolos justo como estaban en la última instantánea confirmada en donde se encuentra la rama main.
+<p>Esto ocasiona dos acciones importantes:</p>
+<ul>
+  <li>El apuntador <code>HEAD</code> se mueve nuevamente a la rama <code>main</code>.</li>
+  <li>Los archivos del directorio de trabajo se revierten automáticamente al estado exacto de la última instantánea confirmada en la rama <code>main</code>.</li>
+</ul>
 
-Si creamos una confirmación dentro de la rama main veremos que las ramas van a comenzar a divergir, los cambios realizados en cada rama están aislados, puedes saltar de una a otra según estimes oportuno.
+<p>Cuando confirmas cambios en ramas distintas, estas comienzan a <strong>divergir</strong>, es decir, cada rama tendrá un historial de confirmaciones propio y aislado. Puedes saltar entre ramas sin perder los cambios confirmados en cada una.</p>
 
-Para ver gráficamente como se van separando las ramas conforme vayas haciendo confirmaciones puedes ocupar este comando.
+<p>Para visualizar de forma gráfica cómo se separan las ramas a medida que avanzas en el historial, puedes utilizar este comando:</p>
 
-$ git log --online --decorate --graph --all
+```bash
+$ git log --oneline --decorate --graph --all
+```
 
-Debido a que una rama en Git es simplemente un archivo que contiene los 40 caracteres de una suma de control, no cuesta nada el crear y eliminar ramas en Git.
+<div style="background-color: rgba(128,128,128,0.15); padding: 12px; border-left: 4px solid #888;">
+  <strong>Dato técnico:</strong><br>
+  Una rama en Git es simplemente un archivo que contiene el hash SHA-1 (40 caracteres) de una confirmación. Esto hace que <strong>crear y eliminar ramas en Git sea extremadamente ligero y rápido</strong>, una de las grandes ventajas frente a otros sistemas de control de versiones.
+</div>
+
+---
+
+<h2>Procedimientos Básicos para Ramificar y Fusionar</h2>
+
+<p>Para comprender mejor cómo funcionan las ramas en Git, vamos a simular un escenario típico de desarrollo en el que intervienen múltiples ramas.</p>
+
+<p>Imagina que estás trabajando en un proyecto web y sigues la siguiente secuencia de pasos:</p>
+
+<ol>
+  <li>Estás desarrollando normalmente en la rama principal (<code>main</code>).</li>
+  <li>Creas una nueva rama para trabajar en una funcionalidad o tema específico.</li>
+  <li>Realizas algunas confirmaciones dentro de esta nueva rama.</li>
+</ol>
+
+<p>De pronto, recibes una llamada notificándote de un error crítico que debe ser resuelto de inmediato. Entonces haces lo siguiente:</p>
+
+<ol start="4">
+  <li>Regresas a la rama principal (<code>main</code>).</li>
+  <li>Creas una nueva rama temporal para trabajar exclusivamente en la solución del error.</li>
+  <li>Solucionas el error dentro de esa nueva rama.</li>
+  <li>Fusionas la rama de corrección con la rama principal usando <code>git merge</code>.</li>
+  <li>Envías los cambios corregidos al servidor remoto con <code>git push</code>.</li>
+  <li>Finalmente, vuelves a la rama en la que estabas trabajando inicialmente para continuar tu desarrollo.</li>
+</ol>
+
+<div style="background-color: rgba(128,128,128,0.12); padding: 10px; border-left: 4px solid #888;">
+  <strong>Tip:</strong> Esta estrategia de ramificación es muy común en flujos de trabajo colaborativos. Permite aislar desarrollos y correcciones sin afectar la estabilidad del proyecto principal.
+</div>
 
 
-Procedimientos Básicos para Ramificar y Fusionar
+<h3>Procedimiento Básico de Ramificación</h3>
 
-Para explicar a detalle el funcionamiento de las ramas vamos a simular un escenario de la vida real.
-Imagina que sigues estos pasos:
--	Trabajas en un sitio web
--	Creas una rama para un nuevo tema sobre el que estás trabajando
--	Realizas algo de trabajo en esa rama
-Recibes una llamada en la que te avisan que hay un error critico que tienes que resolver y haces lo siguiente:
--	Vuelves a la rama principal
--	Creas una nueva rama para trabajar sobre el error
--	Después de resolverlo fusionas esa rama con la rama principal y envías los cambios al servidor
--	Regresas a la rama en la que estabas trabajando inicialmente
+<p>Imagina que estás trabajando en un proyecto y ya tienes varias confirmaciones realizadas. En cierto punto, decides crear una nueva rama para solucionar el error <strong>#53</strong>. Para crear esa rama y cambiarte automáticamente a ella, puedes usar el siguiente comando:</p>
 
-Procedimiento Básico de Ramificación
- Imagina que estás trabajando en un proyecto y ya tienes varias confirmaciones, decides crear una nueva rama para solucionar el error #53, Para crear una nueva rama y saltar automáticamente puedes usar este comando:
-
+```bash
 $ git checkout -b iss53
-Switched to a new branch “iss53”
+Switched to a new branch 'iss53'
+```
 
-Trabajas en el error y haces varias confirmaciones, con ello la rama “iss53” va avanzando.
+<p>Empiezas a trabajar en la rama <code>iss53</code> y haces varias confirmaciones. De esta forma, esa rama va avanzando independientemente de la rama principal.</p>
 
-Mientras estas trabajando en esa rama te notifican que hay un error en el sitio web que tienes que solucionar inmediatamente, para no mezclar tus cambios con los del nuevo error o deshacer todo tu trabajo para solucionar el error que te están notificando simplemente regresas a la rama principal y empiezas a trabajar a partir de allí.
-Advertencia. Si tienes cambios que no han sido confirmados git no te permitirá cambiar de rama.
+<p>Mientras estás trabajando, te notifican que hay un error urgente en el sitio web que debes solucionar inmediatamente. Para evitar mezclar tu trabajo actual con los cambios del nuevo error, simplemente regresas a la rama principal y creas una nueva rama a partir de ella.</p>
 
-Al estar en la rama principal tendrás el directorio tal y como estaba antes de empezar a trabajar con el error #53, creas otra rama llamada “hotfix” en la que resolverás el problema.
-Después de haber hecho varias pruebas y tener el problema solucionado necesitas incorporar esos cambios sobre la rama principal, para esto tienes que saltar a la rama principal y hacer un “merge” de esta forma:
+<div style="background-color: rgba(128,128,128,0.12); padding: 10px; border-left: 4px solid #888;">
+  <strong>Advertencia:</strong> Si tienes cambios sin confirmar en tu directorio de trabajo, Git no te permitirá cambiar de rama. Asegúrate de confirmarlos o almacenarlos temporalmente con <code>git stash</code>.
+</div>
 
+<p>Una vez en la rama principal (<code>main</code>), el directorio de trabajo vuelve a estar como estaba antes de comenzar con el error <code>#53</code>. Entonces creas una nueva rama llamada <code>hotfix</code> para resolver el problema urgente:</p>
+
+```bash
+$ git checkout -b hotfix
+```
+
+<p>Después de realizar varias pruebas y resolver el problema, necesitas incorporar esos cambios en la rama principal. Para ello, primero cambias a la rama <code>main</code> y luego haces un <strong>merge</strong>:</p>
+
+```bash
 $ git checkout main
 $ git merge hotfix
-Updating f42c576..3ª0874c
+```
+
+Updating f42c576..3a0874c
 Fast-forward
-   Index.html | 2 ++
-   1 file changed, 2 insertions (+)
+ Index.html | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Cuando fucionas dos confirmaciones git simplifica las cosas avanzando el puntero, ya que no hay otro trabajo divergente a fusionar, a esto se le denomina “fast-forward”.
-Después de haber resuelto el problema y haberlo fusionado con la rama principal es importante eliminar la rama ya que no la vamos a necesitar más puesto que apunta exactamente a la rama main, para esto usamos el comando:
 
+<p>Cuando Git puede avanzar el puntero de la rama directamente porque no hay divergencias, realiza un <strong>fast-forward</strong>. Esto simplifica el historial de confirmaciones.</p>
+
+<p>Después de haber fusionado los cambios, es buena práctica eliminar la rama <code>hotfix</code> si ya no la necesitas:</p>
+
+```bash
 $ git branch -d hotfix
+```
 
-Nota: El trabajo realizado en la rama hotfix no está en los archivos de la rama iss53, si es necesario fusionarlos te puedes posicionar en la rama iss53 y usar el comando
+<p><strong>Nota:</strong> Los cambios realizados en <code>hotfix</code> no se verán reflejados en la rama <code>iss53</code>, ya que se realizaron en paralelo. Si deseas traer esos cambios, puedes hacerlo desde <code>iss53</code> con:</p>
 
+```bash
+$ git checkout iss53
 $ git merge main
+```
 
-Procedimientos Básicos de Fusión
+<h3>Procedimientos Básicos de Fusión</h3>
 
-Supongamos que ya terminaste de trabajar con el error #53, al igual que como lo hicimos con la rama hotfix vamos a fusionar el contenido de la rama “iss53” con la rama “main”, para esto ejecutamos los siguientes comandos
+<p>Supongamos que ya terminaste de trabajar en la rama <code>iss53</code> que resolvía el error <strong>#53</strong>. Al igual que hicimos con la rama <code>hotfix</code>, ahora vas a fusionar el contenido de <code>iss53</code> con la rama principal <code>main</code>. Para hacerlo, ejecuta los siguientes comandos:</p>
 
-$ git checkout main
-switched to Branch “main”
+<pre><code>$ git checkout main
+Switched to branch 'main'
+
+```bash
 $ git merge iss53
-merge made by the “recursive” strategy.
-index.html |	1 +
-1 file changed, 1 insertion (+)
+Merge made by the 'recursive' strategy.
+ index.html | 1 +
+ 1 file changed, 1 insertion(+)
+```
 
-En este caso el registro de desarrollo había divergido en un punto anterior, Git realizara una fusión a tres bandas, utilizando las dos instantáneas apuntadas por el extremo de cada una de las ramas y por el ancestro común a ambas.
-En lugar de simplemente avanzar el apuntador a la rama, Git crea una nueva instantánea resultado de la fusión a tres bandas y crea automáticamente una nueva confirmación de cambios
+<p>En este caso, los registros de desarrollo de ambas ramas divergieron desde un punto anterior. Git realizará automáticamente una <strong>fusión a tres bandas</strong> (three-way merge), utilizando:</p>
+<ul>
+  <li>La instantánea final de cada una de las ramas</li>
+  <li>El ancestro común de ambas ramas</li>
+</ul>
 
-Git es quien determina automáticamente quien es el mejor ancestro común para realizar la fusión, a diferencia de otros sistemas donde es el desarrollador quien determina cual puede ser el mejor ancestro común.
+<p>En lugar de simplemente avanzar el puntero de la rama como en un <em>fast-forward</em>, Git crea una nueva instantánea resultado de la combinación de los cambios y genera automáticamente una nueva confirmación de fusión.</p>
 
-Ya que fusionaste las dos ramas ya puedes eliminar la rama “iss53”
+<div style="background-color: rgba(128,128,128,0.12); padding: 10px; border-left: 4px solid #888;">
+  <strong>Tip:</strong> Git determina de forma automática cuál es el mejor ancestro común entre ambas ramas para hacer la fusión, lo cual elimina errores y decisiones manuales que en otros sistemas quedan a criterio del desarrollador.
+</div>
 
-Principales Conflictos que Pueden Surgir en las Fusiones
+<p>Una vez fusionadas ambas ramas y confirmados los cambios, puedes eliminar la rama <code>iss53</code> si ya no la necesitas:</p>
 
-Si hay modificaciones dispares en una misma porción de un mismo archivo en las dos ramas distintas que deseas fusionar Git no será capaz de fusionarlas directamente y aparecerá un error asi:
+```bash
+$ git branch -d iss53
+```
 
+
+<h3>Principales Conflictos que Pueden Surgir en las Fusiones</h3>
+
+<p>
+Cuando existen modificaciones distintas en una misma sección de un archivo en las ramas que deseas fusionar, Git no podrá realizar la fusión automáticamente y mostrará un mensaje de error como este:
+</p>
+
+```bash
 $ git merge iss53
 Auto-merging index.html
-CONFLICT (content): Merge conflicto in index.html
+CONFLICT (content): Merge conflict in index.html
 Automatic merge failed; fix conflicts and then commit the result
 
-Git no crea automáticamente una nueva fusión, hace una pausa en el proceso esperando a que tú lo soluciones. Para ver que archivos no se están fusionando se usa el comando “status” y muestra algo así:
 
+<p>
+En estos casos, Git pausa la operación de fusión y espera a que tú resuelvas manualmente los conflictos. Para identificar qué archivos están en conflicto puedes utilizar el comando <code>git status</code>, el cual te mostrará algo como:
+</p>
+
+```bash
 $ git status
 On branch main
 You have unmerged paths
-   (fix conflicts and run “git commit”)
+  (fix conflicts and run “git commit”)
 
 Unmerged paths:
-   (use “git add <file>…” to mark resolution)
-       
-        Both modified:           index.html
+  (use “git add &lt;file&gt;…” to mark resolution)
+  
+    both modified:   index.html
 
-no changes added to commit (use “git add” and/or  “git commit -a”)  
+no changes added to commit (use “git add” and/or “git commit -a”)
+```
 
-Todos los archivos que estén causando problemas se marcaran como (unmerged), Git añade a los archivos unos marcadores especiales de resolución de conflictos que te guiaran cuando abras los archivos y se verán algo así:
+<p>
+Los archivos en conflicto se marcarán como <strong>unmerged</strong>. Git inserta marcas especiales dentro de los archivos afectados para ayudarte a localizar y resolver los conflictos. Al abrir el archivo con un conflicto, verás algo como esto:
+</p>
 
-<<<<<<< HEAD:index.html
-<div id= “footer”>contact : email.support@github.com</div>
-= = = = = = = 
-<div id= “footer”>
+```bash
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:index.html
+&lt;div id="footer"&gt;contact : email.support@github.com&lt;/div&gt;
+=======
+&lt;div id="footer"&gt;
   Please contact us at support@github.com
+&lt;/div&gt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; iss53:index.html
+```
+
+<p>
+Esto indica que la versión actual (HEAD) contiene el bloque superior, mientras que la rama <code>iss53</code> tiene el bloque inferior. Tú debes decidir con cuál versión quedarte o cómo combinar ambas.
+</p>
+
+<div style="border-left: 4px solid #aaa; padding: 0.5em; background-color: rgba(200,200,200,0.15); margin: 1em 0;">
+<strong>Nota:</strong> Una vez que hayas resuelto el conflicto, guarda los cambios, utiliza <code>git add</code> para marcar el archivo como resuelto y luego realiza un <code>git commit</code> para finalizar la fusión.
 </div>
->>>>>>>  iss53:index.html
 
-Esto indica que la version en HEAD contiene lo que esta encima de (= = = = = = =) y la version de iss53 es la que esta abajo, tu tienes que elegir manualmente con cual te quieres quedar 
-
+---
 
 
-Gestion de ramas
+<h2>Gestión de ramas</h2>
 
-Vamos a ver algunas herramientas de gestion muy utiles cuando comienzas a utilizar ramas de manera avanzada
+<p>Vamos a ver algunas herramientas de gestión muy útiles cuando comienzas a utilizar ramas de manera más avanzada.</p>
 
-El comando branch tiene mas funciones que veremos a continuacion:
--	Si ejecutas el comando sin ningún parámetro te da la lista de las ramas que tienes en el proyecto
+<p>El comando <code>branch</code> tiene varias funciones que veremos a continuación:</p>
 
+<ul>
+  <li><strong>Listar ramas:</strong> Si ejecutas el comando sin ningún parámetro, te muestra la lista de las ramas que tienes en el proyecto:</li>
+</ul>
+
+```bash
 $ git branch
-iss53
-*main
-testing 
+  iss53
+* main
+  testing
+```
 
-El (*) muestra la rama a la que apunta HEAD
+<p>El símbolo <code>*</code> indica la rama a la que apunta actualmente <code>HEAD</code>.</p>
 
--	Para ver la última confirmación de cada rama se usa el comando:
+<ul>
+  <li><strong>Ver últimas confirmaciones:</strong> Para ver la última confirmación registrada en cada rama, se usa el comando:</li>
+</ul>
 
+```bash
 $ git branch -v
-     iss53 93b412c fix javascript issue
-     *main 7ª98805 Merge branch iss53
-     testing 782fd34 add scott to the autor
+  iss53     93b412c fix javascript issue
+* main      7a98805 Merge branch iss53
+  testing   782fd34 add Scott to the author
+```
 
--	Para ver las ramas que han sido fusionadas o las que no existen dos comandos
+<ul>
+  <li><strong>Ramas fusionadas o no fusionadas:</strong> Para ver cuáles ramas ya han sido fusionadas o cuáles aún no, puedes usar los siguientes comandos:</li>
+</ul>
+
+```bash
 $ git branch --merged
 $ git branch --no-merged
+```
+
+---
+
+<h2>Flujos de trabajo Ramificados</h2>
+
+<p>Ahora que ya conoces los procedimientos básicos de ramificación y fusión, es momento de explorar algunos de los <strong>flujos de trabajo más comunes</strong> en proyectos que utilizan Git.</p>
+
+<p>Estos flujos te ayudarán a organizar mejor tus procesos de desarrollo, facilitar la colaboración en equipo y mantener un historial limpio y estructurado. A continuación, revisaremos distintos enfoques para que puedas evaluar cuál se adapta mejor a tu proyecto y decidir si deseas incorporarlo en tu ciclo de desarrollo.</p>
+
+
+<h3>Ramas de largo contenido</h3>
+
+<p>Podrías imaginar las ramas como <strong>silos de almacenamiento</strong>, donde las confirmaciones van siendo promovidas hacia silos más estables a medida que son probadas y depuradas.</p>
+
+<p>Este enfoque se puede extender para reflejar distintos grados de estabilidad. Por ejemplo, en proyectos grandes es común encontrar una rama llamada <code>proposed-updates</code>, que actúa como contenedor de todas las integraciones provenientes de otras ramas, pero que aún no están listas para incorporarse a la rama principal.</p>
+
+<p>La idea general consiste en <strong>mantener múltiples ramas con distintos niveles de estabilidad</strong>. Cuando una rama alcanza un nivel suficiente de confianza y solidez, se fusiona con la siguiente rama "superior" en el flujo de trabajo.</p>
+
+<p>Este modelo resulta especialmente útil en proyectos <strong>de larga duración y alta complejidad</strong>, donde mantener un control riguroso sobre el código en producción es esencial.</p>
+
+<img src="https://blog.softtek.com/hs-fs/hubfs/blogs/innovationlabs/4-1.png?width=1100&name=4-1.png" alt="Flujo de ramas de largo contenido" width="600"/>
 
 
 
-Flujos de trabajo Ramificados
+<h3>Ramas Puntuales</h3>
 
-Ya que has visto los procedimientos básicos de ramificacion y fusión, vamos a ver algunos de los flujos de trabajo más comunes, de tal forma que puedas decidir si te gustaria incorporar alguno de ellos a tu ciclo de desarrollo.
+<p>
+Las ramas puntuales son útiles en proyectos de cualquier tamaño. Se trata de ramas que se crean para trabajar en una tarea específica y se eliminan una vez finalizada. Por lo general, son de corta duración.
+</p>
 
-Ramas de largo contenido
+<p>
+Esta técnica permite realizar cambios aislados de forma rápida y organizada. Al tener los cambios contenidos dentro de una rama, resulta mucho más sencillo revisar y validar el código. Puedes mantener estos cambios el tiempo que necesites y fusionarlos con la rama principal solo cuando estén completamente listos.
+</p>
 
-Podria ser mas sencillo pensar en las ramas como si fueran silos de almacenamiento, donde las confirmaciones van siendo promocionadas hacia silos mas estables a medida que son probados y depurados.
-Este sistema de trabajo se puede ampliar para diversos grados de estabilidad, algunos proyectos grandes suelen tener una ramma llamada “proposed updates” en donde esta todo lo integrado por otras ramas pero que aun no esta listo para ser incorporado a la rama principal.
-La idea es siempre mantener diversas ramas en diversos grados de estabilidad; pero cuando una alcance un grado mas estable se fuciona con la rama inmediatamente superior a ella.
-Las ramas de larga duracion son mas practicas y utiles en proyectos largos y complejos
+<div class="note">
+<strong>Nota:</strong> Todas las ramas son completamente locales. Cuando creas, cambias o fusionas ramas, todo sucede en tu repositorio local de Git. No se establece ninguna comunicación con un servidor remoto a menos que realices una acción como <code>push</code> o <code>fetch</code>.
+</div>
 
-
-Ramas Puntuales
-
-Las ramas puntuales son útiles en proyectos de cualquier tamaño, una rama puntual es una rama que se abre para trabajar en algo especifico y despues se cierra, por lo general son de corta duracion.
-Esta tecnica te ayuda a realizar cambios de contecto rapidos y completos, al estar todos los cambios seccionados en cada rama sera mas sencillo revisar el codigo, puedes tener los cambios el tiempo que sea y fucionarlos cuando realmente esten terminados
-
-
-Nota: Es importante recordar que todas las ramas son completamente locales, cuando ramificas y fusionas todo se realiza en el repositorio Git, no hay ninguna comunicación con un servidor
+<img src="https://mascandobits.es/blog/wp-content/uploads/2021/03/git_develop_flow.png" alt="Flujo de ramas puntuales en Git" width="600"/>
 
 
 
-Ramas Remotas
-Son ramas locales que no puedes mover, se mueven automaticamente cuando estableces comunicación en la red.
-Funcionan como marcadores para recordarte en que estado se encontraban tus repositorios remotos la ultima vez que te conectaste a ellos.
-#Agregar mas informacion
+<h3>Ramas Remotas</h3>
+
+<p>
+Las ramas remotas son referencias a ramas que existen en un repositorio remoto, como puede ser GitHub, GitLab o Bitbucket. Aunque técnicamente se almacenan en tu repositorio local, no puedes desplazarte directamente a ellas ni modificarlas como lo harías con una rama local. Se actualizan automáticamente cada vez que realizas una operación de red como <code>git fetch</code> o <code>git pull</code>.
+</p>
+
+<p>
+Estas ramas sirven como marcadores de referencia que indican el último estado conocido de una rama remota. Por ejemplo, si clonas un repositorio desde GitHub, verás ramas como <code>origin/main</code>, <code>origin/dev</code>, etc. Estas no son ramas locales, pero puedes usarlas como base para crear las tuyas propias.
+</p>
+
+<div class="note">
+<strong>Consejo:</strong> Las ramas remotas no se actualizan automáticamente con los cambios hechos en el servidor. Es buena práctica ejecutar <code>git fetch</code> con regularidad para mantener tus referencias remotas sincronizadas.
+</div>
+
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDdpSASI_4s8-6wo5Y-H-b0fuE74Pgx-meKA9UscEryTct3diK_UHiQGEpdQHIpww8mWc8wtpFIIsutKqgsZlWchL11vH6axQLAfHSso2MFE8XWYVtXM8VNI6F35PElXaCPwAtpM2VGOwc/s1600/trabajo-git.jpg" alt="Ramas remotas en Git" width="600"/>
+
+---
+
+
+
+
+
+
+
+
+
 
 
 Publicar
