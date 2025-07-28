@@ -1,144 +1,343 @@
-Git en el Servidor
+<p align="center">
+  <img src="https://git-scm.com/images/logo@2x.png" width="200" alt="Git Logo"/>
+</p>
 
-En este punto ya deveras de ser capaz de realizar la mayoría de las tareas diarias para las cuales estarás usando Git. Sin embargo, para poder trabajar de forma colaborativa es necesario tener un repositorio remoto al que tengan acceso todos los miembros del proyecto y que sea una copia confiable sobre la que puedan trabajar.
-Poner en funcionamiento un servidor Git es bastante sencillo, 
-Primero tienes que elegir con que protocolo te vas a comunicar con el servidor, veremos los diferentes protocolos disponibles, así como los pros y contras de cada uno
-Lo siguiente es explicar algunas configuraciones comunes utilizando dichos protocolos y como poner a funcionar tu servidor.
-Finalmente revisaremos algunas de las opciones hospedadas.
+<h1 align="center"><code>Git en el Servidor</code></h1>
+
+<h2>Introducción</h2>
+
+<p>
+En este punto ya deberías ser capaz de realizar la mayoría de las tareas diarias para las cuales estarás usando Git. 
+Sin embargo, para poder trabajar de forma colaborativa es necesario tener un <strong>repositorio remoto</strong> al que tengan acceso todos los miembros del proyecto y que sea una copia confiable sobre la que puedan trabajar.
+</p>
+
+<p>
+Poner en funcionamiento un servidor Git es bastante sencillo. Primero tienes que elegir con qué protocolo te vas a comunicar con el servidor. 
+Veremos los diferentes <strong>protocolos disponibles</strong>, así como los <strong>pros y contras</strong> de cada uno.
+</p>
+
+<p>
+Lo siguiente es explicar algunas configuraciones comunes utilizando dichos protocolos y cómo poner a funcionar tu propio servidor.
+</p>
+
+<p>
+Finalmente, revisaremos algunas de las <strong>opciones de alojamiento (hosting)</strong> disponibles para Git.
+</p>
+
+---
 
 
-Los Protocolos
+<h2>Los Protocolos</h2>
+
+<p>
 Git puede usar únicamente cuatro protocolos para transferir datos:
--	Local
--	HTTP
--	SSH
--	Git
-Vamos a ver en que consiste cada uno, así como sus ventajas y desventajas.
+</p>
 
-Local Protocol
-Es el más básico, donde el repositorio remoto es simplemente otra carpeta en el disco, se usa cuando todos los miembros del equipo tienen acceso a un solo sistema como lo es un punto de montaje NFS o el caso menos viable es que todos tengan acceso a un solo computador.
-Para clonar o enviar datos a un repositorio remoto local se usa el “path” del proyecto de esta forma:
+<ul>
+  <li>Local</li>
+  <li>HTTP</li>
+  <li>SSH</li>
+  <li>Git</li>
+</ul>
 
-$ git clone /opt/git/preject.git
-$ git clone file:///opt/git /project.git
+<p>
+A continuación, explicaremos en qué consiste cada uno, junto con sus ventajas y desventajas.
+</p>
 
-La mejor forma es usar únicamente el “path” ya que al agregar “file://”  Git lanza el proceso que usa habitualmente para transferir datos sobre una red y dicho proceso suele ser menos eficiente y más tardado.
-Para añadir un repositorio local a un proyecto git existente puedes hacerlo de esta manera:
+<h3>Protocolo Local</h3>
 
+<p>
+Es el más básico, donde el repositorio remoto es simplemente otra carpeta en el disco. Se usa cuando todos los miembros del equipo tienen acceso a un solo sistema, como un punto de montaje <code>NFS</code>, o en el caso menos común, que todos trabajen sobre un mismo equipo físico.
+</p>
+
+<p>
+Para clonar o enviar datos a un repositorio local se utiliza la ruta del proyecto, como en los siguientes ejemplos:
+</p>
+
+```bash
+$ git clone /opt/git/project.git
+$ git clone file:///opt/git/project.git
+```
+
+<p> La mejor práctica es usar directamente la ruta sin el prefijo <code>file://</code>, ya que este último lanza un proceso adicional para transferencia de datos que puede ser menos eficiente. </p> 
+<p> Para añadir un repositorio local a un proyecto Git existente puedes usar el siguiente comando: </p>
+
+```bash
 $ git remote add local_proj /opt/git/project.git
+```
 
-Ventajas:
-La ventaja de los repositorios locales es su simplicidad y el aprovechamiento de los permisos preexistentes de acceso, también es útil para recuperar rápidamente el contenido del repositorio de trabajo de alguna otra persona
+<h4>Ventajas</h4> 
+<ul> 
+    <li>Simplicidad en la configuración.</li> 
+    <li>Aprovecha los permisos de acceso del sistema.</li> 
+    <li>Útil para recuperar rápidamente el contenido del repositorio de otro usuario.</li> 
+</ul>
 
-Desventajas:
-La principal desventaja es la dificultad de acceso desde distintas ubicaciones, también cabe destacar que una carpeta compartida no es principalmente la opción más rápida, un repositorio local es rapido solamente en las ocasiones que tienes acceso rápido a él, normalmente un repositorio NFS es más lento que un repositorio SSH.
+<h4>Desventajas</h4> 
+    <ul> 
+    <li>Difícil acceso desde ubicaciones remotas o fuera de red.</li> 
+    <li>Una carpeta compartida (como NFS) no siempre es la opción más rápida.</li> 
+    <li>Un repositorio local es rápido solo si tienes acceso directo al sistema de archivos.</li> 
+</ul> 
 
+<h3>Protocolos HTTP</h3>
 
-Protocolos HTTP
-Git puede utilizar HTTP de dos maneras, antes de la versión 1.6.6 solamente se podía usar el protocolo HTTP solo en modo lectura, en laa versión 1.6.6 se integró un nuevo protocolo HTTP más inteligente el cual trabaja similar al protocolo SSH.
-Nos referiremos a la nueva versión como HTTP “inteligente” y a la versión anterior como HTTP “tonto”.
+<p>
+Git puede utilizar el protocolo HTTP de dos maneras. Antes de la versión 1.6.6, solo estaba disponible el modo de lectura conocido como <strong>HTTP tonto</strong>. A partir de la versión 1.6.6 se introdujo un nuevo protocolo más eficiente, llamado <strong>HTTP inteligente</strong>, que funciona de forma similar al protocolo SSH.
+</p>
 
-HTTP Inteligente 
-Funciona similar al protocolo SSH pero se ejecuta sobre puertos HTTP/S y puede usar los mecanismos de autenticación HTTP, por lo que es mas fácil para los usuarios por que se identifican con usuario y contraseña en lugar de usar claves SSH.
-El protocolo HTTP tiene una única URL para todo, como clonar, enviar y recibir datos.
+<h4>HTTP Inteligente</h4>
 
-HTTP Tonto
-Lo bueno de este protocolo es su simplicidad para configurarlo, solamente es poner el repositorio Git bajo el directorio raíz de documentos HTTP y especificar un punto de enganche, desde ese momento cualquiera con acceso al servidor web donde se publique el repositorio podrá clonarlo.
-Para permitir acceso de lectura se deben de ejecutar los siguientes comandos:
+<p>
+Este protocolo opera sobre puertos HTTP/HTTPS y utiliza mecanismos de autenticación estándar, lo que facilita el uso para los usuarios, ya que pueden identificarse con nombre de usuario y contraseña, sin necesidad de gestionar claves SSH.
+</p>
 
+<p>
+Una ventaja clave del protocolo HTTP inteligente es que utiliza una única URL para todas las operaciones: clonar, enviar y recibir datos.
+</p>
+
+<h4>HTTP Tonto</h4>
+
+<p>
+Su principal virtud es la simplicidad de configuración. Basta con colocar el repositorio Git en el directorio raíz de documentos del servidor web y configurar el hook correspondiente. Desde ese momento, cualquiera con acceso al servidor podrá clonar el repositorio.
+</p>
+
+<p>Pasos para habilitar acceso de lectura:</p>
+
+```bash
 $ cd /var/www/htdocs
 $ git clone --bare /path/to/git_project gitproject.git
 $ cd gitproject.git
 $ mv hooks/post-update.sample hooks/post-update
 $ chmod a+x hooks/post-update
+```
 
-Ahora las personas que quieran clonar el repositorio tienen que usar este comando:
+<p> Una vez configurado, los usuarios pueden clonar el repositorio con: </p>
 
-$ git clone https://example.com/gitproject .git
+```bash
+$ git clone https://example.com/gitproject.git
+```
 
-En este ejemplo usamos la carpeta /var/www/htdocs que es la habitual en configuraciones, pero se puede usar cualquier servidor web estático
-Ventajas
-Nos centraremos en las ventajas del HTTP “inteligente.
--	Tener una única URL para todos los tipos de acceso y que el servidor pida autenticación solo cuando sea necesario
--	Permitir autenticar mediante usuario y contraseña es una ventaja sobre SSH ya que no es necesario generar claves SSH y subir la publica al servidor 
+<p> En este ejemplo se usa <code>/var/www/htdocs</code>, que es una ruta común en configuraciones estándar, pero puede usarse cualquier servidor web estático. </p> 
 
-Desventajas
-HTTP/S puede ser un poco más complejo de configurar comparado con SSH en algunos sitios.
- En otros casos se encuentra poca ventaja sobre el uso de otros protocolos.
+<h4>Ventajas del HTTP Inteligente</h4> 
+<ul>
+    <li>Usa una única URL para todas las operaciones (clonar, enviar, recibir).</li> 
+    <li>Solicita autenticación solo cuando es necesario.</li> 
+    <li>Permite autenticarse con usuario y contraseña, evitando la necesidad de claves SSH.</li> 
+</ul> 
 
-Protocolo SSH
+<h4>Desventajas</h4> 
+<ul>
+    <li>La configuración de HTTP/S puede ser más compleja en comparación con SSH.</li> 
+    <li>En algunos entornos no ofrece ventajas significativas sobre otros protocolos.</li> 
+</ul>
 
-Es un protocolo muy usado para alojar repositorios Git en hostings privados, además es un protocolo de red autenticado sencillo de utilizar
-Para clonar un repositorio en SSH se usa el siguiente comando:
 
+
+
+
+<h3>Protocolo SSH</h3>
+
+<p>
+El protocolo SSH es ampliamente utilizado para alojar repositorios Git en servidores privados. Se trata de un protocolo de red seguro y autenticado que resulta relativamente sencillo de usar.
+</p>
+
+<p>Para clonar un repositorio utilizando SSH, se puede usar el siguiente comando:</p>
+
+```bash
 $ git clone ssh://user@server/Project.git
+```
 
-También puedes usar la sintaxis estilo scp del protocolo SSH:
+<p>O bien, usar la sintaxis estilo <code>scp</code>:</p>
 
+```bash
 $ git clone user@server:project.git
+```
 
-Ventajas
--	Es relativamente fácil de configurar 
--	El acceso es seguro, estando todas las transferencias encriptadas y autentificadas 
--	Al igual que los protocolos HTTP, Git y Local, SSH es eficiente comprimiendo los datos lo más posible antes de transferirlos. 
+<h4>Ventajas</h4> 
+<ul>
+    <li>Relativamente fácil de configurar.</li> 
+    <li>Ofrece un acceso seguro, con todas las transferencias encriptadas y autenticadas.</li> 
+    <li>Es eficiente, ya que comprime los datos antes de transferirlos (al igual que HTTP, Git y Local).</li> 
+</ul> 
 
-Desventajas
-Es imposible dar acceso anónimo al repositorio, todos los colaboradores deben tener configurado un acceso SSH al servidor. Si lo usas dentro de una red corporativa, posiblemente SSH sea el único protocolo que tengas que usar.
-
-Protocolo Git
-Es un demonio (deamon) especial que viene incorporado en Git, escucha por un puerto dedicado (9418) y funciona de manera similar a SSH pero sin ninguna medida de autentificación, para hacer público este repositorio se tiene que crear un archivo llamado “git-deamon-export-ok”.
-Al agregar este archivo el repositorio estar disponible para que cualquiera lo pueda clonar, por lo que si alguien encuentra tu proyecto en internet puede hacerle un push y agregar información que no te sirva.
-Ventajas
-Es el más rápido de todos los disponibles, ideal para proyectos muy grandes que no requieran de autenticación.
-Utiliza los mismos mecanismos de transmisión de datos que el protocolo SSH pero sin la sobrecarga de encriptación y autentificación.
-
-Desventajas
-Falta de autentificación, no es recomendado que sea el único protocolo de acceso al proyecto.
-Necesita activar su propio “demonio” y necesita configurar “xinetd” o similar, lo cual no suele estar disponible en el sistema donde estes trabajando.
+<h4>Desventajas</h4> 
+<ul> 
+    <li>No permite acceso anónimo al repositorio.</li> 
+    <li>Cada colaborador debe tener configurado su acceso SSH al servidor.</li> 
+</ul> 
+<p class="nota"> <strong>Nota:</strong> En entornos corporativos, es común que SSH sea el único protocolo permitido para acceso remoto seguro. </p>
 
 
-Configurando Git en un servidor
-Demostraremos los comandos y pasos necesarios para hacer las instalaciones básicas en un servidor basado en Linux.
-Para configurar por primera vez un servidor hay que exportar un repositorio existente en un nuevo repositorio vacío. Para clonar un repositorio con el fin de crear un nuevo repositorio vacío se usa el comando:
+<h3>Protocolo Git</h3>
 
+<p>
+El protocolo Git utiliza un <em>demonio</em> especial incluido en Git que escucha en un puerto dedicado (9418). Funciona de forma similar a SSH, pero <strong>sin ninguna medida de autenticación</strong>.
+</p>
+
+<p>
+Para hacer público un repositorio utilizando este protocolo, se debe agregar un archivo llamado <code>git-daemon-export-ok</code> en el directorio del repositorio. Una vez hecho esto, el repositorio estará disponible para ser clonado por cualquier persona.
+</p>
+
+<p class="advertencia">
+<strong>Advertencia:</strong> Si alguien encuentra tu repositorio en línea, podrá clonarlo sin restricciones y, si tienes configuraciones incorrectas, incluso hacer <code>push</code> con contenido no deseado.
+</p>
+
+<h4>Ventajas</h4>
+<ul>
+  <li>Es el protocolo más rápido disponible.</li>
+  <li>Ideal para proyectos de gran tamaño donde no se requiere autenticación.</li>
+  <li>Utiliza los mismos mecanismos de transmisión que SSH, pero sin la sobrecarga de encriptación y autenticación.</li>
+</ul>
+
+<h4>Desventajas</h4>
+<ul>
+  <li>No cuenta con autenticación, lo que representa un riesgo de seguridad.</li>
+  <li>No es recomendable como único método de acceso.</li>
+  <li>Requiere levantar su propio demonio y configurar servicios como <code>xinetd</code> o similares, lo cual no siempre está disponible por defecto.</li>
+</ul>
+
+---
+
+
+<h2>Configurando Git en un Servidor</h2>
+
+<p>
+A continuación, se mostrarán los pasos y comandos necesarios para realizar una configuración básica de un servidor Git en un entorno basado en Linux.
+</p>
+
+<p>
+Cuando se configura un servidor por primera vez, es necesario exportar un repositorio existente en forma de repositorio vacío (<em>bare repository</em>). Para ello, se utiliza el siguiente comando:
+</p>
+
+```bash
 $ git clone --bare my_project my_project.git
-Cloning into bare repository “my_project.git”…
+Cloning into bare repository 'my_project.git'…
 done.
+```
 
-Al ejecutar este comando tendrás una copia de los datos del directorio Git en tu directorio my_project.git
+<p>
+Al ejecutar este comando, se genera una copia de los datos del repositorio original en un nuevo directorio llamado <code>my_project.git</code>, el cual contiene exclusivamente el historial de versiones y metadatos, sin archivos de trabajo. Este tipo de repositorio es ideal para ser usado como repositorio central en un servidor.
+</p>
 
-Colocando un repositorio vacío en un servidor
 
-Ya que tienes una copia vacía de tu repositorio, necesitas ponerlo en tu servidor y establecer sus protocolos.
-Digamos que tu servidor es “git.example.com” con acceso a SSH y quieres almacenar todos tus repositorios bajo el directorio /opt/git.
-Puedes configurar tu nuevo repositorio copiando tu repositorio vacío a:
+<h3>Colocando un Repositorio Vacío en un Servidor</h3>
 
+<p>
+Una vez que tienes una copia vacía de tu repositorio (<em>bare repository</em>), necesitas trasladarla a tu servidor y establecer el protocolo de acceso.
+</p>
+
+<p>
+Supongamos que tu servidor se llama <code>git.example.com</code>, que tienes acceso vía SSH y deseas almacenar todos tus repositorios en el directorio <code>/opt/git</code>. Puedes subir el repositorio utilizando el siguiente comando:
+</p>
+
+```bash
 $ scp -r my_project.git user@git.example.com:/opt/git
+```
 
-Ahora los usuarios que tienen acceso SSH con permisos de lectura en el directorio /opt/git pueden clonar tu repositorio con el comando:
+<p>
+Después de copiar el repositorio al servidor, cualquier usuario con acceso SSH y permisos de lectura sobre el directorio <code>/opt/git</code> podrá clonar el repositorio con:
+</p>
 
+```bash
 $ git clone user@git.example.com:/opt/git/my_project.git
+```
 
-Si un usuario accede por medio de SSH a un servidor y tiene permisos de escritura en el directorio automáticamente también tendrá acceso push.
-Pequeñas configuraciones
-Uno de los aspectos más complicados de Git es la gestión de usuarios.
-Si quieres que algunos archivos sean de solo lectura para unos usuarios y de lectura y escritura para otros, el acceso y los permisos pueden ser un poco más difíciles de organizar.
-Existen algunas maneras con las cuales les puedes dar acceso a tu equipo:
--	La primera es crear cuentas para todos, es sencillo, pero si tienes un equipo muy grande puede ser tardado
--	La segunda es crear un solo usuario git en la máquina, cada usuario te tiene que enviar su llave SSH publica para que la agregues al archivo “~/.ssh/authorized_keys” 
--	La tercera manera es hacer que tu servidor SSH autentifique desde un servidor LDAP o desde alguna otra fuente de autentificación.
+<div class="nota">
+<strong>Nota:</strong> Si un usuario accede mediante SSH al servidor y tiene permisos de escritura sobre el repositorio, automáticamente también podrá hacer <code>push</code> de sus cambios.
+</div>
 
 
-Generando tu clave pública SSH
 
-Para crear una clave publica tienes que asegurarte que no tengas ya una clave, para esto te tienes que situar en el directorio “~/.ssh” y ver los archivos que tienes en ese directorio con el comando “ls”, si cuentas con un archivo con extensión “.pub” esa es tu clave publica, ahora lo único que necesitas hacer es copiar el contenido de ese archivo y compartirlo con el administrador del servidor.
+<h3>Pequeñas Configuraciones</h3>
 
-En caso de que no tengas ese archivo o incluso no tienes la carpeta .ssh se ejecuta el siguiente comando
+<p>
+Uno de los aspectos más complejos al trabajar con Git en servidores es la <strong>gestión de usuarios y permisos</strong>. 
+Si necesitas que algunos archivos sean de solo lectura para ciertos usuarios y de lectura y escritura para otros, organizar correctamente los accesos puede ser un reto.
+</p>
 
+<p>
+A continuación, se presentan algunas estrategias para gestionar el acceso de tu equipo al repositorio:
+</p>
+
+<ul>
+  <li>
+    <strong>Crear cuentas individuales para cada usuario:</strong> Es una solución sencilla y directa, pero puede volverse lenta y poco escalable si tu equipo es muy grande.
+  </li>
+  <li>
+    <strong>Usar un único usuario <code>git</code> en el servidor:</strong> Cada miembro del equipo debe enviarte su <em>clave pública SSH</em>, la cual deberás agregar al archivo 
+    <code>~/.ssh/authorized_keys</code> del usuario <code>git</code>. Esta es una forma común y efectiva de control de acceso.
+  </li>
+  <li>
+    <strong>Integración con sistemas de autenticación externos:</strong> Puedes configurar tu servidor SSH para que autentique contra un servidor LDAP u otra fuente de autenticación 
+    centralizada. Esta opción es más compleja, pero más robusta para entornos corporativos.
+  </li>
+</ul>
+
+---
+
+<h2>Generando tu Clave Pública SSH</h2>
+
+<p>
+Antes de generar una nueva clave SSH, es importante verificar si ya cuentas con una. Para ello, navega al directorio <code>~/.ssh</code> y lista su contenido con el siguiente comando:
+</p>
+
+```bash
+$ ls ~/.ssh
+```
+
+<p>
+Si ves un archivo con extensión <code>.pub</code> (por ejemplo, <code>id_rsa.pub</code>), significa que ya tienes una clave pública generada. 
+En ese caso, basta con abrir ese archivo, copiar su contenido y compartirlo con el administrador del servidor.
+</p>
+
+<p>
+En caso de que no tengas una clave generada o el directorio <code>.ssh</code> no exista, puedes crear una nueva con el siguiente comando:
+</p>
+
+```bash
 $ ssh-keygen
+```
 
-Al ejecutar ese comando te va a pedir confirmación de dónde vas a guardar las claves, después te va a pedir dos veces una contraseña, en caso de que no quieras estar escribiendo la contraseña cada que uses la clave la puedes dejar en blanco
+<p>
+Al ejecutarlo, se te pedirá confirmar la ubicación para guardar la clave. Si no deseas cambiarla, simplemente presiona <kbd>Enter</kbd>. 
+Luego se te solicitará establecer una contraseña opcional para proteger tu clave privada.
+</p>
 
-Conclusión:
-Vimos varias opciones para obtener un repositorio Git remoto, tener tu propio servidor te da control y te permite usar tu servidor dentro de tu propio cortafuegos, pero esto necesita mucho tiempo de configuración y mantenimiento.
-Si usas un servidor hospedado es fácil de configurar y mantener, pero algunas organizaciones no permiten tener tu código en el servidor de alguien más. 
+<div class="nota">
+  <strong>Nota:</strong> Puedes dejar la contraseña en blanco si no deseas escribirla cada vez que utilices tu clave, aunque esto reduce el nivel de seguridad.
+</div>
+
+---
+
+<h3>Conclusión</h3>
+
+<p>
+Exploramos distintas formas de configurar y acceder a un repositorio Git remoto. 
+Tener tu propio servidor Git te brinda un mayor control, además de la posibilidad de operar dentro de tu propio cortafuegos, lo cual puede ser fundamental para ciertos entornos empresariales. 
+Sin embargo, esto implica mayor tiempo de configuración y tareas de mantenimiento constantes.
+</p>
+
+<p>
+Por otro lado, utilizar servicios de hospedaje como GitHub, GitLab o Bitbucket simplifica el proceso de configuración y reduce la carga administrativa. 
+No obstante, algunas organizaciones tienen políticas que restringen el almacenamiento de código en servidores externos, por lo que esta opción no siempre es viable.
+</p>
+
+
+---
+
+## <span style="color:#9E9D24"><strong>Licencia</strong></span>
+
+Este contenido está licenciado bajo [Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).  
+Puedes compartirlo, adaptarlo y utilizarlo con fines educativos y no comerciales, siempre que des crédito al autor original:
+
+> **Jesús Eduardo Arciniega Tlacomulco**
+
+---
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/1024px-Git-logo.svg.png" width="160" alt="Git footer logo"/>
+</p>
+
+<p align="center"><i>Desarrollado por Jesús Eduardo Arciniega Tlacomulco – Curso de Git y GitHub</i></p>
