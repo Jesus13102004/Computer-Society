@@ -241,7 +241,7 @@ $ git merge iss53
 Auto-merging index.html
 CONFLICT (content): Merge conflict in index.html
 Automatic merge failed; fix conflicts and then commit the result
-
+```
 
 <p>
 En estos casos, Git pausa la operación de fusión y espera a que tú resuelvas manualmente los conflictos. Para identificar qué archivos están en conflicto puedes utilizar el comando <code>git status</code>, el cual te mostrará algo como:
@@ -266,13 +266,13 @@ Los archivos en conflicto se marcarán como <strong>unmerged</strong>. Git inser
 </p>
 
 ```bash
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:index.html
-&lt;div id="footer"&gt;contact : email.support@github.com&lt;/div&gt;
+<<<<<<< HEAD:index.html
+<div id="footer">;contact : email.support@github.com</div>;
 =======
-&lt;div id="footer"&gt;
+<div id="footer">;
   Please contact us at support@github.com
-&lt;/div&gt;
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; iss53:index.html
+</div>;
+>>>>>>> iss53:index.html
 ```
 
 <p>
