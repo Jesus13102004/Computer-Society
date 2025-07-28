@@ -591,5 +591,21 @@ También estás capacitado para compartir tus ramas a través de un servidor rem
 Dominar estas herramientas te permitirá llevar un control más claro, flexible y profesional sobre tus proyectos, facilitando el trabajo en equipo y manteniendo un historial limpio y comprensible.
 </p>
 
+---
+
+## <span style="color:#9E9D24"><strong>Licencia</strong></span>
+
+Este contenido está licenciado bajo [Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).  
+Puedes compartirlo, adaptarlo y utilizarlo con fines educativos y no comerciales, siempre que des crédito al autor original:
+
+> **Jesús Eduardo Arciniega Tlacomulco**
+
+---
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/1024px-Git-logo.svg.png" width="160" alt="Git footer logo"/>
+</p>
+
+<p align="center"><i>Desarrollado por Jesús Eduardo Arciniega Tlacomulco – Curso de Git y GitHub</i></p>
 
 
