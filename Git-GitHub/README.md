@@ -64,7 +64,7 @@ El contenido se encuentra estructurado para uso autodidacta, académico o profes
       <td><code>herramientas.md</code></td>
     </tr>
     <tr>
-      <td>8</td>
+      <td>08</td>
       <td><a href="./internos.md">Los entresijos internos de Git</a></td>
       <td><code>internos.md</code></td>
     </tr>
@@ -100,7 +100,7 @@ El contenido se encuentra estructurado para uso autodidacta, académico o profes
 
 ---
 
-## 🧾 Certificación recomendada
+## Certificación recomendada
 
 <p align="center">
   <strong>Git / Control de versiones con certificado</strong><br>
