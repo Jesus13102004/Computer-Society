@@ -2,7 +2,7 @@
   <img src="https://git-scm.com/images/logo@2x.png" width="200" alt="Git Logo"/>
 </p>
 
-<h1 align="center"><code>Git en el Servidor</code></h1>
+<h1 align="center"><code>GIT EN EL SERVIDOR</code></h1>
 
 <h2>Introducción</h2>
 
