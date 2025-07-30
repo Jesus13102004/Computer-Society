@@ -64,29 +64,9 @@ El contenido se encuentra estructurado para uso autodidacta, académico o profes
       <td><code>herramientas.md</code></td>
     </tr>
     <tr>
-      <td>08</td>
-      <td><a href="./personalizacion.md">Personalización de Git: configuración avanzada</a></td>
-      <td><code>personalizacion.md</code></td>
-    </tr>
-    <tr>
-      <td>09</td>
-      <td><a href="./otros-sistemas.md">Git y otros sistemas de control de versiones</a></td>
-      <td><code>otros-sistemas.md</code></td>
-    </tr>
-    <tr>
-      <td>10</td>
+      <td>8</td>
       <td><a href="./internos.md">Los entresijos internos de Git</a></td>
       <td><code>internos.md</code></td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td><a href="./entornos.md">Git en otros entornos (Windows, Linux, IDEs)</a></td>
-      <td><code>entornos.md</code></td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td><a href="./comandos.md">Comandos de Git: referencia práctica</a></td>
-      <td><code>comandos.md</code></td>
     </tr>
   </tbody>
 </table>
@@ -120,7 +100,25 @@ El contenido se encuentra estructurado para uso autodidacta, académico o profes
 
 ---
 
+## 🧾 Certificación recomendada
 
+<p align="center">
+  <strong>Git / Control de versiones con certificado</strong><br>
+  <em>Curso de Coursera impartido por Atlassian</em>
+</p>
+
+<ul>
+  <li><strong>Curso:</strong> <a href="https://www.coursera.org/learn/version-control-with-git" target="_blank">Version Control with Git</a></li>
+  <li><strong>Plataforma:</strong> Coursera</li>
+  <li><strong>Duración estimada:</strong> ~10 horas</li>
+  <li><strong>Enfoque:</strong> Git completo desde nivel básico hasta temas como <em>merge</em>, resolución de conflictos, ramificación (<em>branching</em>) y trabajo con repositorios remotos.</li>
+</ul>
+
+<blockquote>
+  Recomendado para validar tus conocimientos y fortalecer tu portafolio profesional.
+</blockquote>
+
+---
 
 ## <span style="color:#9E9D24"><strong>Licencia</strong></span>
 
