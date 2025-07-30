@@ -235,7 +235,7 @@ for (int i = 0; i &lt; 5; i++) {
     System.out.println("i is : " + i);
 }
 ```
-```
+
 
 <p>
 Si mencionas el lenguaje (como <code>java</code> en este caso), GitHub aplicará automáticamente <strong>resaltado de sintaxis</strong> para una mejor visualización.
