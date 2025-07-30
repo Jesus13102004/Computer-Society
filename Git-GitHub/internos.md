@@ -412,7 +412,7 @@ $ git gc
 
 ---
 
-<h3>Conclusiones</h3>
+<h2>Conclusiones</h2>
 
 <p>
     En este capítulo exploramos varios <strong>comandos de fontanería</strong> que operan a bajo nivel dentro de Git. 
