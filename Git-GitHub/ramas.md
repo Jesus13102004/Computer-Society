@@ -2,7 +2,7 @@
   <img src="https://git-scm.com/images/logo@2x.png" width="200" alt="Git Logo"/>
 </p>
 
-<h1 align="center"><code>Ramificaciones en Git</code></h1>
+<h1 align="center"><code>RAMIFICACIONES EN GIT</code></h1>
 
 
 <h2>Introducción a las Ramificaciones en Git</h2>
