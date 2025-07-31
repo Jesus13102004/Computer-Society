@@ -26,3 +26,4 @@ print(type(my_int_to_str)) # esto muestra el tipo de dato que tiene la variable
 # Interaccion con el usuario
 age = input ("How old are you? ") # Se almacena en la variable age lo ingresado por el usuario
 print("Your age is:", age)
+
