@@ -1,7 +1,7 @@
-
+import funciones
 repetir = True
 opcion = 0
-
+id = 1
 while repetir==True:
 
     print("---GESTOR DE TAREAS---")
@@ -18,12 +18,16 @@ while repetir==True:
         continue
 
     if opcion == 1:
+        id=funciones.añadirTarea(id)
         print("Tarea Agregada")
     elif opcion == 2:
-        print("Mostrando la lista")
+        print("Mostrando la lista...")
+        funciones.lista()
     elif opcion == 3:
+        funciones.completar()
         print("Tarea completada")
     elif opcion == 4:
+        funciones.eliminar()
         print("Tarea Eliminada")
     elif opcion == 5:
         print("Saliendo del programa ...")
